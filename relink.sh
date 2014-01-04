@@ -9,8 +9,9 @@ DOT_FILES=(.addpath .aspell.conf .bash_aliases .bashrc .bash_logout .gitconfig .
 
 for file in ${DOT_FILES[@]}
 do
+    find -name $HOME/$file -xtype l -delete
     diff -w ${SCRIPT_DIR}/$file $HOME/$file 2>&1 > /dev/null
-    if [ $? != 0 ]; then
+    if [ $? == 1 ]; then
 	ln -s ${SCRIPT_DIR}/$file $HOME/$file.dot \
 	    && echo "File exists: create '$file.dot'"
     else
