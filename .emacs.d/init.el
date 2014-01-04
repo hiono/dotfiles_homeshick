@@ -132,12 +132,12 @@
 ;;                      "Redmine:" 'redmine-tickets-function
 ;;                      "redmine" "arg1"))
 ;; (add-hook 'magit-before-stashes-hook 'magit-insert-redmine)
-(defun redmine-tickets-function ()
-  (let ((redmine (buffer-substring (line-beginning-position) (line-end-position))))
-    (goto-char (line-beginning-position))
-    (magit-with-section redmine 'redmine
-      (magit-set-section-info redmine)
-      (forward-line))))
+;; (defun redmine-tickets-function ()
+;;   (let ((redmine (buffer-substring (line-beginning-position) (line-end-position))))
+;;     (goto-char (line-beginning-position))
+;;     (magit-with-section redmine 'redmine
+;;       (magit-set-section-info redmine)
+;;       (forward-line))))
 
 (defun magit-ignore-whitespace ()
   (interactive)
