@@ -20,3 +20,7 @@ fi
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
+
+# keychain
+/usr/bin/keychain $HOME/.ssh/id_rsa
+source ~/.keychain/$HOSTNAME-sh
