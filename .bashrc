@@ -132,15 +132,14 @@ fi
 if [ -f ~/.bash_local ]; then
     . ~/.bash_local
 fi
-: ${_bash_local_dir:=~/.bash_local.d}
-readonly _bash_local_dir
+: ${_ldir:=~/.bash_local.d}
 shopt -s extglob progcomp
 _backup_glob='@(#*#|*@(~|.@(bak|orig|rej|swp|dpkg*|rpm@(orig|new|save))))'
-if [ -d ~/.bash_local.d && -r ~/.bash_local.d && -x ~/.bash_local.d ]; then
-    for i in $(LC_ALL=C command ls "${_bash_local_dir}"); do
-        i=~/.bash_local.d/$i
+if [ -d ${_ldir} ] && [ -r ${_ldir} ] && [ -x ${_ldir} ]; then
+    for i in $(LC_ALL=C command ls "${_ldir}"); do
+        i=${_ldir}/$i
         [[ ${i##*/} != @(${_backup_glob}|Makefile*) \
             && -f $i && -r $i ]] && . "$i"
     done
 fi
-unset i _blacklist_glob _bash_local_dir
+unset i _backup_glob _ldir
