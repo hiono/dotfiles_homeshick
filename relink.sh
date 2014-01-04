@@ -1,23 +1,20 @@
 #!/bin/bash
 
-cd $HOME/dotfiles
-git pull
+# PARENT_DIR=$(cd $(dirname $0)/..;pwd)
+SCRIPT_DIR=$(cd $(dirname $0);pwd)
+
+[ -d $(pwd)/.git ] && git pull
 
 DOT_FILES=(.addpath .aspell.conf .bash_aliases .bashrc .bash_logout .gitconfig .gitignore .profile .tmux.conf .emacs.d/init.el)
 
 for file in ${DOT_FILES[@]}
 do
-    diff -w $HOME/dotfiles/$file $HOME/$file 2>&1 > /dev/null
-    if [ $? == 0 ]&&[ ! -L $HOME/$file ]; then
-	rm -f  $HOME/$file
-    fi
-    if [ -a $HOME/$file ]; then
-	if [ ! -L $HOME/$file ]; then
-	    ln -s $HOME/dotfiles/$file $HOME/$file.dot && \
-	    echo "ファイルが存在しますから.dotファイルつくるよ: $file"
-	fi
+    diff -w ${SCRIPT_DIR}/$file $HOME/$file 2>&1 > /dev/null
+    if [ $? != 0 ]; then
+	ln -s ${SCRIPT_DIR}/$file $HOME/$file.dot \
+	    && echo "File exists: create '$file.dot'"
     else
-	ln -s $HOME/dotfiles/$file $HOME/$file && \
-	echo "シンボリックリンクを貼りました: $file"
+	ln -snf ${SCRIPT_DIR}/$file $HOME/$file \
+	    && echo "OK: create symbolic link '$file'"
     fi
 done
