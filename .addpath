@@ -1,0 +1,155 @@
+#! /usr/bin/env bash
+
+# Original: http://www.ep.sci.hokudai.ac.jp/~michi/pc/sh/src/addpath/0.4/
+## Concept
+#
+# addpath.sh -- add PATH
+#
+# 重複する事無く PATH を追加するスクリプト.
+#
+
+## How to use
+#
+# 1. 好きな場所に保存する (実行権限を付ける必要はない).
+#
+# 2. source コマンドで関数を読み込む (addpath というコマンドが登録される).
+#      $ source addpath.sh
+#
+# 3. $ addpath {-b|-p|-r} [PathName] [Path] という風に使う.
+#      + [PathName] ":" で区切ってパスを指定するタイプの環境変数なら何でも可.
+#      + [Path] 追加対象 PATH. 複数追加する時は ":" で区切る.
+#      + オプション
+#        - デフォルトは末尾に追加し, 既存の順位は変更しない.
+#        - [-b] 末尾に移動(無ければ末尾に追加).
+#        - [-p] 先頭に追加.
+#        - [-r] 削除.
+#
+#    ex1: $ addpath PATH /usr/local/bin:/usr/local/sbin
+#    ex2: $ addpath MANPATH ~/man:/usr/local/man
+#    ex3: $ addpath -p PATH ~/bin
+#    ex4: $ addpath -r PATH /sbin:/usr/sbin:/usr/local/sbin
+#
+# 4. 関数を削除したい時は unset コマンドを使う
+#      $ unset -f addpath
+#
+# 5. 恒常使用する場合は .bashrc 等に 2 のコマンドを書いておくか
+#    以下で定義されている関数をそのまま切り貼りする.
+#    ex: [ -r ~/bin/addpath.sh ] && source ~/bin/addpath.sh
+#
+
+## script start
+#
+
+## 関数を定義
+#
+  function addpath(){
+  ## 特殊変数をセット
+    local ScriptName='addpath.sh'
+    local Author='Koichi Michiasa'
+    local Year='2005-2007'
+    local Ver='0.4.7'
+    local Update='2007/12/20'
+    local Contact='michi[at]ep.sci.hokudai.ac.jp'
+    local URL='http://www.ep.sci.hokudai.ac.jp/~michi/pc/sh/'
+
+  ## メインルーチン
+    ## 変数をセット
+    local Type='-n' {O,D,C,R,T}Path
+
+    ## オプションをチェック
+    case "$1" in
+      -h|--help)
+        echo \
+"  NAME:
+    ${ScriptName} Ver. ${Ver}
+
+  SYNOPSIS:
+    ${FUNCNAME} {Option} [PathName] [Path]
+
+  DESCRIPTION:
+    ${ScriptName} -- add PATH to the environment variable
+
+  OPTIONS:
+    -b            : move path to backward
+    -h, --help    : display help
+    -p            : add path forward
+    -r            : remove path
+    -v, --version : display version
+
+  VERSION:
+    Ver. ${Ver}, Last Update: ${Update}
+
+  AUTHOR:
+    ${Author} <${Contact}>
+    URL: <${URL}>"
+        return
+      ;;
+
+      -v|--version)
+        echo \
+"  ${ScriptName} Ver. ${Ver}, Last Update: ${Update}
+
+  Copyright (C) ${Year} by ${Author}
+  URL: <${URL}>
+  Report bugs to <${Contact}>"
+        return
+      ;;
+
+      -[bpr])
+        Type=$1; shift
+      ;;
+    esac
+
+    ## 引数の数をチェック
+    (( $# > 1 )) || {
+      echo \
+"  USAGE: $FUNCNAME {-b|-p|-r} [PathName] [Path]
+
+  Type \"$FUNCNAME [-h|--help]\" show advanced help."
+      return 1
+    } 1>&2
+
+    ## PATH を追加
+    case "$Type" in
+      -n)
+        OPath="${!1%:}:${2%:}:"
+      ;;
+
+      -p)
+        OPath="${2%:}:${!1%:}:"
+      ;;
+
+      -r)
+        OPath="${!1%:}:"
+        DPath="${2%:}:"
+        DPath="${DPath//\/:/:}"
+      ;;
+
+      -b)
+        $FUNCNAME -r "$@"
+        OPath="${!1%:}:${2%:}:"
+      ;;
+    esac
+    OPath="${OPath//\/:/:}"
+
+    ## PATH を再構築
+    RPath=$(
+      IFS=':'
+      set -- ${OPath%:}
+      for CPath in "$@" ; do
+        [[ -d "$CPath" && -r "$CPath" ]] || continue
+
+        [[ -n "$DPath" &&
+          ( "$DPath" != "${DPath#${CPath}:}" || "$DPath" != "${DPath#*:${CPath}:}" )
+        ]] && continue
+
+        [[ "$TPath" = "${TPath#${CPath}:}" && "$TPath" = "${TPath#*:${CPath}:}" ]] || continue
+
+        TPath="${TPath}${CPath}:"
+        echo -n "${CPath}:"
+      done
+    )
+
+    ## PATH を入れ替え
+    export "$1"="${RPath%:}"
+  }

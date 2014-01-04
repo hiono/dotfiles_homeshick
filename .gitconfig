@@ -1,0 +1,13 @@
+[core]
+	editor = emacs
+	pager =
+	autocrlf = input
+[alias]
+	co = checkout
+	br = branch
+	st = status
+	clog = log --graph --pretty=\"format:%C(yellow)%h%Cblue%d%Creset %s %C(black bold)%an, %ar%Creset\"
+[credential]
+	helper = cache
+[push]
+	default = matching
