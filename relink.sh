@@ -10,6 +10,7 @@ DOT_FILES=(.addpath .aspell.conf .bash_aliases .bashrc .bash_logout .gitconfig .
 for file in ${DOT_FILES[@]}
 do
     find $(dirname $HOME/$file) -name $(basename $HOME/$file) -xtype l -delete
+    [ $? == 1 ] && continue
     diff -w ${SCRIPT_DIR}/$file $HOME/$file 2>&1 > /dev/null
     if [ $? == 1 ]; then
 	ln -s ${SCRIPT_DIR}/$file $HOME/$file.dot \
