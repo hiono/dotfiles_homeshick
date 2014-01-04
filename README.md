@@ -12,5 +12,6 @@ $ git clone https://github.com/hiono/dotfiles.git $HOME/.dotfiles
 ## Usage
 
 `
-$ ./.dorfiles/relink.sh
+$ cd $HOME/.dorfiles
+$ ./relink.sh
 `
