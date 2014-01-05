@@ -31,14 +31,22 @@ DOT_FILES=(.addpath .aspell.conf .bash_aliases .bashrc .bash_logout .gitconfig .
 
 for file in ${DOT_FILES[@]}
 do
-    find $(dirname $HOME/$file) -name $(basename $HOME/$file) -xtype l -delete
+    DEST=$HOME/$file
+    SRC=${SCRIPT_DIR}/$file
+    find $(dirname ${DEST}) -name $(basename ${DEST}) -xtype l -delete
     [ $? == 1 ] && continue
-    diff -w ${SCRIPT_DIR}/$file $HOME/$file 2>&1 > /dev/null
-    if [ $? == 1 ]; then
-	ln -s ${SCRIPT_DIR}/$file $HOME/$file.dot \
-	    && echo "File exists: create '$file.dot'"
+    if [ $FORCE == 1 ]; then
+	mkdir -p $(dirname ${DEST})
+	if [ -f ${DEST} ] && [ ! -h ${DEST} ]; then
+	    BACKUP=$(dirname ${DEST})/.dotbackup
+	    mkdir -p ${BACKUP}
+	    mv ${DEST} ${BACKUP}/$file.$(date +"%y-%m-%d-%T")
+	fi
+    fi
+    diff -w ${SRC} ${DEST} 2>&1 > /dev/null
+    if [ $? == 1 ] && [ $FORCE == 0 ]; then
+	ln -s ${SRC} ${DEST}.dot && echo "File exists: create '$file.dot'"
     else
-	ln -snf ${SCRIPT_DIR}/$file $HOME/$file \
-	    && echo "OK: create symbolic link '$file'"
+	ln -snf ${SRC} ${DEST}	 && echo "OK: create symbolic link '$file'"
     fi
 done
