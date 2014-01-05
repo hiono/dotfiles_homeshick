@@ -15,3 +15,8 @@ $ git clone https://github.com/hiono/dotfiles.git $HOME/.dotfiles
 $ cd $HOME/.dorfiles
 $ ./relink.sh
 `
+OR force override.
+`
+$ cd $HOME/.dorfiles
+$ ./relink.sh -f
+`
