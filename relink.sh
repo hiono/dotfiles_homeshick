@@ -1,5 +1,27 @@
 #!/bin/bash
 
+# options
+usage_exit() {
+    echo "Usage: $0 [-f] [-h]" 1>&2
+    echo "    -f: force override"
+    echo "    -h: help"
+    exit 1
+}
+FORCE=0
+while getopts fh OPT
+do
+    case $OPT in
+	f)  FORCE=1
+	    ;;
+	h)  usage_exit
+	    ;;
+\?) usage_exit
+;;
+    esac
+done
+
+shift $((OPTIND - 1))
+
 # PARENT_DIR=$(cd $(dirname $0)/..;pwd)
 SCRIPT_DIR=$(cd $(dirname $0);pwd)
 
