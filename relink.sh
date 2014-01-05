@@ -33,8 +33,9 @@ for file in ${DOT_FILES[@]}
 do
     DEST=$HOME/$file
     SRC=${SCRIPT_DIR}/$file
-    find $(dirname ${DEST}) -name $(basename ${DEST}) -xtype l -delete
-    [ $? == 1 ] && continue
+    # check same file
+    [ ${SRC} == $(readlink ${DEST}) ] && continue
+    # prepare force option
     if [ $FORCE == 1 ]; then
 	mkdir -p $(dirname ${DEST})
 	if [ -f ${DEST} ] && [ ! -h ${DEST} ]; then
@@ -43,6 +44,10 @@ do
 	    mv ${DEST} ${BACKUP}/$file.$(date +"%y-%m-%d-%T")
 	fi
     fi
+    # delete broken symlink
+    find $(dirname ${DEST}) -name $(basename ${DEST}) -xtype l -delete
+    [ $? == 1 ] && continue
+    # link operation
     diff -w ${SRC} ${DEST} 2>&1 > /dev/null
     if [ $? == 1 ] && [ $FORCE == 0 ]; then
 	ln -s ${SRC} ${DEST}.dot && echo "File exists: create '$file.dot'"
