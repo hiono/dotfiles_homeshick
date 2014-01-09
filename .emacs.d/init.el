@@ -95,7 +95,7 @@
 (defvar installing-package-list
   '(
     ;; ここに使っているパッケージを書く。
-    melpa
+    ;; melpa
     magit
     git-gutter+
     markdown-mode
@@ -115,7 +115,7 @@
         (package-install pkg))))
 
 ; melpa.el (download後しか使えないからここに書く)
-(require 'melpa)
+;;(require 'melpa)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; 行末の空白を削除
@@ -180,18 +180,18 @@
 
 ;; fix code ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; debian-wheezy等ではemacs24に問題あるため
-(defadvice package--add-to-archive-contents
-  (around package-filter-add-to-archive-contents (package archive)
-          activate compile)
-  "Add filtering of available packages using `package-filter-function', if non-nil."
-  (when (and package-filter-function
-             (funcall package-filter-function
-                      (car package)
-                    (or (ignore-errors ; < 24.3.50
-                          (package-desc-vers (cdr package)))
-                        (ignore-errors ; >= 24.3.50
-                          (package-desc-version (cdr package))))
-                      archive))
-    ad-do-it))
+;; (defadvice package--add-to-archive-contents
+;;   (around package-filter-add-to-archive-contents (package archive)
+;;           activate compile)
+;;   "Add filtering of available packages using `package-filter-function', if non-nil."
+;;   (when (and package-filter-function
+;;              (funcall package-filter-function
+;;                       (car package)
+;;                     (or (ignore-errors ; < 24.3.50
+;;                           (package-desc-vers (cdr package)))
+;;                         (ignore-errors ; >= 24.3.50
+;;                           (package-desc-version (cdr package))))
+;;                       archive))
+;;     ad-do-it))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (message "Loaded")
