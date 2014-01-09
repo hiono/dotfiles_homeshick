@@ -143,3 +143,8 @@ if [ -d ${_ldir} ] && [ -r ${_ldir} ] && [ -x ${_ldir} ]; then
     done
 fi
 unset i _backup_glob _ldir
+
+# Local bin
+if [ -d ~/bin ]; then
+    addpath -p PATH ~/bin
+fi
