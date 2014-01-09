@@ -95,7 +95,7 @@
 (defvar installing-package-list
   '(
     ;; ここに使っているパッケージを書く。
-    ;; melpa
+    ;; melpa ;; 2014-01-07辺りからErrorになったので外し
     magit
     git-gutter+
     markdown-mode
