@@ -24,3 +24,6 @@ fi
 # keychain
 /usr/bin/keychain $HOME/.ssh/id_rsa
 source ~/.keychain/$HOSTNAME-sh
+
+# TERM
+export TERM=screen-256color
