@@ -2,6 +2,8 @@
 	editor = emacs
 	pager =
 	autocrlf = input
+[include]
+	path = $HOME/.gitconfig.local
 [alias]
 	co = checkout
 	br = branch
