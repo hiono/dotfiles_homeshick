@@ -148,7 +148,7 @@
 (require 'git-gutter+)
 
 ;; If you enable global minor mode
-(global-git-gutter+-mode t)
+(global-git-gutter+-mode nil)
 
 ;; If you enable git-gutter+-mode for some modes
 (add-hook 'ruby-mode-hook 'git-gutter+-mode)
@@ -162,15 +162,15 @@
      ;;; Jump between hunks
      (define-key git-gutter+-mode-map (kbd "C-x n") 'git-gutter+-next-hunk)
      (define-key git-gutter+-mode-map (kbd "C-x p") 'git-gutter+-previous-hunk)
-
      ;;; Act on hunks
      (define-key git-gutter+-mode-map (kbd "C-x v =") 'git-gutter+-show-hunk)
-     (define-key git-gutter+-mode-map (kbd "C-x r") 'git-gutter+-revert-hunks)
+     (define-key git-gutter+-mode-map (kbd "C-x v u") 'git-gutter+-revert-hunks)
      ;; Stage hunk at point.
      ;; If region is active, stage all hunk lines within the region.
-     (define-key git-gutter+-mode-map (kbd "C-x t") 'git-gutter+-stage-hunks)
-     (define-key git-gutter+-mode-map (kbd "C-x c") 'git-gutter+-commit)
-     (define-key git-gutter+-mode-map (kbd "C-x C") 'git-gutter+-stage-and-commit)))
+     ;; (define-key git-gutter+-mode-map (kbd "C-x t") 'git-gutter+-stage-hunks)
+     ;; (define-key git-gutter+-mode-map (kbd "C-x c") 'git-gutter+-commit)
+     ;; (define-key git-gutter+-mode-map (kbd "C-x C") 'git-gutter+-stage-and-commit)
+     ))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; server start for emacs-client
