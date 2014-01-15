@@ -196,8 +196,8 @@
 (add-hook 'ruby-mode-hook 'git-gutter+-mode)
 (add-hook 'python-mode-hook 'git-gutter+-mode)
 
-(global-set-key (kbd "C-x C-g") 'git-gutter+:toggle)
-(global-set-key (kbd "C-x v =") 'git-gutter+:popup-hunk)
+(global-set-key (kbd "C-x C-g") 'git-gutter+-mode)
+(global-set-key (kbd "C-x v =") 'git-gutter+-popup-hunk)
 
 (eval-after-load 'git-gutter+
   '(progn
@@ -209,9 +209,9 @@
      (define-key git-gutter+-mode-map (kbd "C-x v u") 'git-gutter+-revert-hunks)
      ;; Stage hunk at point.
      ;; If region is active, stage all hunk lines within the region.
-     ;; (define-key git-gutter+-mode-map (kbd "C-x t") 'git-gutter+-stage-hunks)
-     ;; (define-key git-gutter+-mode-map (kbd "C-x c") 'git-gutter+-commit)
-     ;; (define-key git-gutter+-mode-map (kbd "C-x C") 'git-gutter+-stage-and-commit)
+     (define-key git-gutter+-mode-map (kbd "C-x v s") 'git-gutter+-stage-hunks)
+     (define-key git-gutter+-mode-map (kbd "C-x v c") 'git-gutter+-commit)
+     (define-key git-gutter+-mode-map (kbd "C-x v C") 'git-gutter+-stage-and-commit)
      ))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
