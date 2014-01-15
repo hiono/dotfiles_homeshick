@@ -10,6 +10,6 @@
 	st = status
 	clog = log --graph --pretty=\"format:%C(yellow)%h%Cblue%d%Creset %s %C(black bold)%an, %ar%Creset\"
 [credential]
-	helper = cache
+	helper = cache --timeout=1800
 [push]
 	default = matching
