@@ -34,7 +34,7 @@ do
     DEST=$HOME/$file
     SRC=${SCRIPT_DIR}/$file
     # check same file
-    [ ${SRC} == $(readlink ${DEST}) ] && continue
+    [ "${SRC}" == "$(readlink ${DEST})" ] && continue
     # prepare force option
     if [ $FORCE == 1 ]; then
 	mkdir -p $(dirname ${DEST})
@@ -45,7 +45,7 @@ do
 	fi
     fi
     # delete broken symlink
-    find $(dirname ${DEST}) -name $(basename ${DEST}) -xtype l -delete
+    find $(dirname ${DEST}) -maxdepth 1 -name $(basename ${DEST}) -xtype l -delete
     [ $? == 1 ] && continue
     # link operation
     diff -w ${SRC} ${DEST} 2>&1 > /dev/null
