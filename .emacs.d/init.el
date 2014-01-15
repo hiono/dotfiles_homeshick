@@ -3,6 +3,7 @@
 (set-language-environment 'Japanese)
 (setenv "LC_ALL" "C")
 (setenv "LC_TIME" "C")
+(global-set-key (kbd "C-\\") nil)
 
 ; 極力 UTF-8 とする
 (prefer-coding-system 'utf-8)
