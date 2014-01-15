@@ -182,6 +182,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; open-junk-file
 (require 'open-junk-file)
+(
 (setq open-junk-file-format "~/junk/%Y/%m/%Y-%m-%d-%H%M%S.")
 (global-set-key (kbd "C-x j") 'open-junk-file)
 
@@ -199,8 +200,8 @@
 (add-hook 'c++-mode-hook 'git-gutter+-mode)
 (add-hook 'yaml-mode-hook 'git-gutter+-mode)
 
-(global-set-key (kbd "C-x C-g") 'git-gutter+-mode)
-(global-set-key (kbd "C-x v p") 'git-gutter+-popup-hunk)
+(global-set-key (kbd "C-x g") 'git-gutter+-mode)        ; Turn on/off in the current buffer
+(global-set-key (kbd "C-x G") 'global-git-gutter+-mode) ; Turn on/off globally
 
 (eval-after-load 'git-gutter+
   '(progn
