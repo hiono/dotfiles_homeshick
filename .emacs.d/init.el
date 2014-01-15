@@ -195,9 +195,12 @@
 ;; If you enable git-gutter+-mode for some modes
 (add-hook 'ruby-mode-hook 'git-gutter+-mode)
 (add-hook 'python-mode-hook 'git-gutter+-mode)
+(add-hook 'c-mode-hook 'git-gutter+-mode)
+(add-hook 'c++-mode-hook 'git-gutter+-mode)
+(add-hook 'yaml-mode-hook 'git-gutter+-mode)
 
 (global-set-key (kbd "C-x C-g") 'git-gutter+-mode)
-(global-set-key (kbd "C-x v =") 'git-gutter+-popup-hunk)
+(global-set-key (kbd "C-x v p") 'git-gutter+-popup-hunk)
 
 (eval-after-load 'git-gutter+
   '(progn
