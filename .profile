@@ -22,8 +22,10 @@ if [ -d "$HOME/bin" ] ; then
 fi
 
 # keychain
-/usr/bin/keychain $HOME/.ssh/id_rsa
-source ~/.keychain/$HOSTNAME-sh
+if [ ${SHLVL} -le 1 ];then
+    /usr/bin/keychain $HOME/.ssh/id_rsa
+    source ~/.keychain/$HOSTNAME-sh
+fi
 
 # TERM
 export TERM=screen-256color
