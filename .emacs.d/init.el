@@ -223,6 +223,10 @@
 (unless (server-running-p)
   (server-start))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; aliases
+(defalias 'qrr 'query-replace-regexp)
+
 ;; fix code ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; debian-wheezy等ではemacs24に問題あるため
 ;; (defadvice package--add-to-archive-contents
