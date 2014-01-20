@@ -98,6 +98,7 @@
     ;; ここに使っているパッケージを書く。
     ;; melpa ;; 2014-01-07辺りからErrorになったので外し
     magit
+    gist
     git-gutter+
     markdown-mode
     google-c-style
@@ -178,6 +179,15 @@
 (defun magit-ignore-whitespace ()
   (interactive)
   (setq magit-diff-options '("-b")))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; gist
+(require 'magit)
+(require 'gist)
+(setq gist-view-gist t)
+(setq github-user (magit-get "github.user"))
+(setq github-password (magit-get "github.password"))
+(setq github-token (magit-get "github.token"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; open-junk-file
