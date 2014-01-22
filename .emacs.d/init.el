@@ -106,6 +106,7 @@
     open-junk-file
     ag
     wgrep-ag
+    smartparens
     ))
 
 (let ((not-installed (loop for x in installing-package-list
@@ -236,6 +237,12 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; aliases
 (defalias 'qrr 'query-replace-regexp)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; smartparens
+; Fuco1/smartparens Wiki https://github.com/Fuco1/smartparens/wiki#wiki-information-for-new-users
+(smartparens-global-mode t)
+(require 'smartparens-config)
 
 ;; fix code ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; debian-wheezy等ではemacs24に問題あるため
