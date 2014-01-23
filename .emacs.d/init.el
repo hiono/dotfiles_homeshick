@@ -248,6 +248,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; helm
 ;  おすすめの helm拡張 - Life is very short http://d.hatena.ne.jp/syohex/20121207/1354885367
+(require 'helm)
+(global-set-key (kbd "C-c r") `helm-recentf)
 (global-set-key (kbd "M-y") `helm-show-kill-ring)
 ;; helm-git-project
 (defun helm-c-sources-git-project-for (pwd)
