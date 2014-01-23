@@ -106,7 +106,6 @@
     open-junk-file
     ag
     wgrep-ag
-    smartparens
     helm
     ))
 
@@ -238,12 +237,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; aliases
 (defalias 'qrr 'query-replace-regexp)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; smartparens
-; Fuco1/smartparens Wiki https://github.com/Fuco1/smartparens/wiki#wiki-information-for-new-users
-(smartparens-global-mode t)
-(require 'smartparens-config)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; helm
