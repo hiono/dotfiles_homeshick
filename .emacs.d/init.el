@@ -143,7 +143,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; gist
-((require 'gist)
+(require 'gist)
 (setq gist-view-gist t)
 (setq github-user (magit-get "github.user"))
 (setq github-password (magit-get "github.password"))
