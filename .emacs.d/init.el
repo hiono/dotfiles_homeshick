@@ -103,6 +103,7 @@
     yaml-mode
     open-junk-file
     ace-jump-mode
+    wgrep
     ))
 
 (let ((not-installed (loop for x in installing-package-list
@@ -169,6 +170,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; wgrep
 (require 'wgrep)
+(setq wgrep-auto-save-buffer t)
+(setq wgrep-change-readonly-file t)
+(setq wgrep-enable-key "r")
+(define-key grep-mode-map "\C-x\C-q" 'wgrep-toggle-readonly-area)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; server start for emacs-client
