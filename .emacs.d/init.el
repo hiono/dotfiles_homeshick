@@ -99,7 +99,6 @@
     ;; melpa ;; 2014-01-07辺りからErrorになったので外し
     magit
     gist
-    git-gutter+
     markdown-mode
     google-c-style
     yaml-mode
@@ -197,37 +196,37 @@
 (setq open-junk-file-format "~/junk/%Y/%m/%Y-%m-%d-%H%M%S.")
 (global-set-key (kbd "C-x j") 'open-junk-file)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; git-gutter
-(require 'git-gutter+)
+;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; ; git-gutter
+;; (require 'git-gutter+)
 
-;; If you enable global minor mode
-(global-git-gutter+-mode nil)
+;; ;; If you enable global minor mode
+;; (global-git-gutter+-mode nil)
 
-;; If you enable git-gutter+-mode for some modes
-(add-hook 'ruby-mode-hook 'git-gutter+-mode)
-(add-hook 'python-mode-hook 'git-gutter+-mode)
-(add-hook 'c-mode-hook 'git-gutter+-mode)
-(add-hook 'c++-mode-hook 'git-gutter+-mode)
-(add-hook 'yaml-mode-hook 'git-gutter+-mode)
+;; ;; If you enable git-gutter+-mode for some modes
+;; (add-hook 'ruby-mode-hook 'git-gutter+-mode)
+;; (add-hook 'python-mode-hook 'git-gutter+-mode)
+;; (add-hook 'c-mode-hook 'git-gutter+-mode)
+;; (add-hook 'c++-mode-hook 'git-gutter+-mode)
+;; (add-hook 'yaml-mode-hook 'git-gutter+-mode)
 
-(global-set-key (kbd "C-x g") 'git-gutter+-mode)        ; Turn on/off in the current buffer
-(global-set-key (kbd "C-x G") 'global-git-gutter+-mode) ; Turn on/off globally
+;; (global-set-key (kbd "C-x g") 'git-gutter+-mode)        ; Turn on/off in the current buffer
+;; (global-set-key (kbd "C-x G") 'global-git-gutter+-mode) ; Turn on/off globally
 
-(eval-after-load 'git-gutter+
-  '(progn
-     ;;; Jump between hunks
-     (define-key git-gutter+-mode-map (kbd "C-x n") 'git-gutter+-next-hunk)
-     (define-key git-gutter+-mode-map (kbd "C-x p") 'git-gutter+-previous-hunk)
-     ;;; Act on hunks
-     (define-key git-gutter+-mode-map (kbd "C-x v =") 'git-gutter+-show-hunk)
-     (define-key git-gutter+-mode-map (kbd "C-x v u") 'git-gutter+-revert-hunks)
-     ;; Stage hunk at point.
-     ;; If region is active, stage all hunk lines within the region.
-     (define-key git-gutter+-mode-map (kbd "C-x v s") 'git-gutter+-stage-hunks)
-     (define-key git-gutter+-mode-map (kbd "C-x v c") 'git-gutter+-commit)
-     (define-key git-gutter+-mode-map (kbd "C-x v C") 'git-gutter+-stage-and-commit)
-     ))
+;; (eval-after-load 'git-gutter+
+;;   '(progn
+;;      ;;; Jump between hunks
+;;      (define-key git-gutter+-mode-map (kbd "C-x n") 'git-gutter+-next-hunk)
+;;      (define-key git-gutter+-mode-map (kbd "C-x p") 'git-gutter+-previous-hunk)
+;;      ;;; Act on hunks
+;;      (define-key git-gutter+-mode-map (kbd "C-x v =") 'git-gutter+-show-hunk)
+;;      (define-key git-gutter+-mode-map (kbd "C-x v u") 'git-gutter+-revert-hunks)
+;;      ;; Stage hunk at point.
+;;      ;; If region is active, stage all hunk lines within the region.
+;;      (define-key git-gutter+-mode-map (kbd "C-x v s") 'git-gutter+-stage-hunks)
+;;      (define-key git-gutter+-mode-map (kbd "C-x v c") 'git-gutter+-commit)
+;;      (define-key git-gutter+-mode-map (kbd "C-x v C") 'git-gutter+-stage-and-commit)
+;;     ))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; server start for emacs-client
