@@ -103,7 +103,9 @@
     google-c-style
     yaml-mode
     open-junk-file
+    color-moccur
     helm
+    wgrep-helm
     ace-jump-mode
     ))
 
@@ -171,15 +173,19 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; helm
 ;  おすすめの helm拡張 - Life is very short http://d.hatena.ne.jp/syohex/20121207/1354885367
-(require 'helm)
 (global-set-key (kbd "C-c r") `helm-recentf)
-(global-set-key (kbd "M-y") `helm-show-kill-ring)
-(global-set-key (kbd "C-h g") `helm-git-project)
+; 「欲しい情報に素早くアクセスするためのたくさんの方法」tech.kayac.com Advent Calendar 2012 | tech.kayac.com - KAYAC engineers' blog http://tech.kayac.com/archive/23_techkayaccom_advent_calendar_2012.html
+(require 'ibuf-ext)
+
+(require 'helm-config)
+
+;; max width of buffer name in buffer list
+(defvar helm-buffer-max-length 50)
 
 ;; helm-git-project
 ;; original is http://d.hatena.ne.jp/yaotti/20101216/1292500323
 ;; patch from usk_t(https://gist.github.com/747399)
-;; (defvar helm-git-project-dir nil)
+(defvar helm-git-project-dir nil)
 
 (defun git-project:root-dir ()
   (file-name-directory (file-truename
@@ -212,6 +218,26 @@
 		   helm-c-source-git-project-for-all)))
     (helm-other-buffer sources
 		       (format "*Helm git project in %s*" default-directory))))
+
+;; keybindings
+(define-key global-map (kbd "C-M-y") 'helm-show-kill-ring)
+(define-key global-map (kbd "C-x b") 'helm-for-files)
+(define-key global-map (kbd "C-x f") 'helm-find-files)
+(define-key global-map (kbd "C-x g") 'helm-git-project)
+(define-key global-map (kbd "C-x i") 'helm-imenu)
+(define-key global-map (kbd "M-x")   'helm-M-x)
+
+;; overwrite helm debugging command prefix
+(eval-after-load 'helm
+  '(progn (define-key helm-map (kbd "C-h") 'delete-backward-char)))
+
+(eval-after-load 'helm-files
+  '(progn (define-key helm-find-files-map (kbd "C-h") 'delete-backward-char)))
+
+;; helm-c-moccurの代わりにhelm-occurを使うようにした - $shibayu36->blog; http://shibayu36.hatenablog.com/entry/2013/10/19/191958
+(define-key global-map (kbd "C-M-o") 'helm-occur) ;; helm-occurの起動
+(define-key isearch-mode-map (kbd "C-o") 'helm-occur-from-isearch) ;; isearchからhelm-occurを起動
+(define-key helm-map (kbd "C-c C-a") 'all-from-helm-occur) ;; helm-occurからall-extに受け渡し
 
 ;; fix code ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; debian-wheezy等ではemacs24に問題あるため
