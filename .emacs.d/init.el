@@ -107,6 +107,7 @@
     ag
     wgrep-ag
     helm
+    ace-jump-mode
     ))
 
 (let ((not-installed (loop for x in installing-package-list
