@@ -161,7 +161,9 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; recentf
-
+(require 'recentf)
+(setq recentf-auto-cleanup 'never) ;; tramp対策。
+(recentf-mode 1)
 (define-key global-map (kbd "C-c C-f") 'recentf-open-files)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
