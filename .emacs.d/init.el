@@ -1,11 +1,11 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; 言語を日本語にする
+;; 言語を日本語にする
 (set-language-environment 'Japanese)
 (setenv "LC_ALL" "C")
 (setenv "LC_TIME" "C")
 (global-set-key (kbd "C-\\") nil)
 
-; 極力 UTF-8 とする
+;; 極力 UTF-8 とする
 (prefer-coding-system 'utf-8)
 
 ;;; load-path を設定する
@@ -15,8 +15,8 @@
       (normal-top-level-add-subdirs-to-load-path)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; 『 dired http://homepage1.nifty.com/blankspace/emacs/dired.html 』
-; dired関連
+;; dired http://homepage1.nifty.com/blankspace/emacs/dired.html
+;; dired関連
 (require 'ls-lisp)
 (let (current-load-list)
   (defadvice insert-directory
@@ -43,7 +43,7 @@
             ))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; 『 emacs - Should `flet` be replaced with `cl-flet` or `cl-letf` ? - Stack Overflow http://stackoverflow.com/questions/18895605/should-flet-be-replaced-with-cl-flet-or-cl-letf 』
+;; emacs - Should `flet` be replaced with `cl-flet` or `cl-letf` ? - Stack Overflow http://stackoverflow.com/questions/18895605/should-flet-be-replaced-with-cl-flet-or-cl-letf
 (defmacro lawlist-flet (bindings &rest body)
       "Make temporary overriding function definitions.
     This is an analogue of a dynamically scoped `let' that operates on the function
@@ -68,8 +68,7 @@
                    (when (cl--compiling-file)
                      ;; Bug#411.  It would be nice to fix this.
                      (and (get (car x) 'byte-compile)
-                          (error "Byte-compiling a redefinition of `%s' \
-    will not work - use `labels' instead" (symbol-name (car x))))
+                          (error "Byte-compiling a redefinition of `%s' will not work - use `labels' instead" (symbol-name (car x))))
                      ;; FIXME This affects the rest of the file, when it
                      ;; should be restricted to the flet body.
                      (and (boundp 'byte-compile-function-environment)
@@ -80,16 +79,16 @@
          ,@body))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; 『 Emacs でプラグインを簡単にインストールするための package.el を使ってみる - おんがえしの日記 http://d.hatena.ne.jp/tuto0621/20120613/1339607400 』
+; Emacs でプラグインを簡単にインストールするための package.el を使ってみる - おんがえしの日記 http://d.hatena.ne.jp/tuto0621/20120613/1339607400
 ;(setq byte-compile-warnings '(not obsolete))
 (require 'package)
-; Add package-archives
+;; Add package-archives
 (add-to-list 'package-archives
 	     '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (add-to-list 'package-archives
 	     '("marmalade" . "http://marmalade-repo.org/packages/"))
 
-; Initialize
+;; Initialize
 (package-initialize)
 
 (require 'cl)
@@ -114,15 +113,15 @@
     (dolist (pkg not-installed)
         (package-install pkg))))
 
-; melpa.el (download後しか使えないからここに書く)
+;; melpa.el (download後しか使えないからここに書く)
 ;;(require 'melpa)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; 行末の空白を削除
+;; 行末の空白を削除
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; Magit
+;;Magit
 (require 'magit)
 (setq magit-diff-options '("-b"))
 (define-key global-map (kbd "C-h m") 'magit-status)
@@ -158,14 +157,23 @@
 (global-set-key (kbd "C-x j") 'open-junk-file)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; server start for emacs-client
+;; aliases
+(defalias 'qrr 'query-replace-regexp)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; recentf
+
+(define-key global-map (kbd "C-c C-f") 'recentf-open-files)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; wgrep
+(require 'wgrep)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; server start for emacs-client
 (require 'server)
 (unless (server-running-p)
   (server-start))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; aliases
-(defalias 'qrr 'query-replace-regexp)
 
 ;; fix code ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; debian-wheezy等ではemacs24に問題あるため
