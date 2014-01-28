@@ -125,8 +125,11 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Magit
 (require 'magit)
-(define-key global-map (kbd "C-x m") 'magit-status)
-(define-key magit-mode-map (kbd "C-x l") 'magit-log)
+(setq magit-diff-options '("-b"))
+(define-key global-map (kbd "C-h m") 'magit-status)
+(eval-after-load 'magit
+  '(progn (define-key magit-mode-map (kbd "C-h") 'delete-backward-char)))
+
 ;; ;; for git-redmine
 ;; (magit-define-inserter redmine ()
 ;;   (magit-git-section 'redmine
@@ -139,10 +142,6 @@
 ;;     (magit-with-section redmine 'redmine
 ;;       (magit-set-section-info redmine)
 ;;       (forward-line))))
-
-(defun magit-ignore-whitespace ()
-  (interactive)
-  (setq magit-diff-options '("-b")))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; gist
