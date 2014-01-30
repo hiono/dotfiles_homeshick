@@ -127,8 +127,13 @@
 (setq magit-diff-options '("-b"))
 (define-key global-map (kbd "C-h m") 'magit-status)
 (eval-after-load 'magit
-  '(progn (define-key magit-mode-map (kbd "C-h") 'delete-backward-char)))
-
+  '(progn
+     (define-key magit-mode-map (kbd "C-h") 'delete-backward-char)
+     (set-face-background 'magit-diff-add "#222222")
+     (set-face-background 'magit-diff-del "#222222")
+     (set-face-foreground 'magit-diff-file-header "#0000ff")
+     (set-face-background 'magit-diff-file-header "#888888")
+     ))
 ;; ;; for git-redmine
 ;; (magit-define-inserter redmine ()
 ;;   (magit-git-section 'redmine
