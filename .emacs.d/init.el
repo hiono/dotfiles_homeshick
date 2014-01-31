@@ -181,7 +181,6 @@
 (setq wgrep-auto-save-buffer t)
 (setq wgrep-change-readonly-file t)
 (setq wgrep-enable-key "r")
-(define-key grep-mode-map "\C-x\C-q" 'wgrep-toggle-readonly-area)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; server start for emacs-client
