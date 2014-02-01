@@ -5,8 +5,8 @@
 (setenv "LC_TIME" "C")
 
 ;; disable default-keys
-(global-set-key (kbd "C-\\") nil)
-(global-set-key (kbd "C-x m") nil)
+(define-key global-map (kbd "C-\\") nil)
+(define-key global-map (kbd "C-x m") nil)
 
 ;; 極力 UTF-8 とする
 (prefer-coding-system 'utf-8)
@@ -162,7 +162,7 @@
 ; open-junk-file
 (require 'open-junk-file)
 (setq open-junk-file-format "~/junk/%Y/%m/%Y-%m-%d-%H%M%S.")
-(global-set-key (kbd "C-x j") 'open-junk-file)
+(define-key global-map (kbd "C-x j") 'open-junk-file)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; aliases
