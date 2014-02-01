@@ -129,6 +129,7 @@
 (require 'magit)
 (setq magit-diff-options '("-b"))
 (define-key global-map (kbd "C-h m") 'magit-status)
+(define-key global-map (kbd "C-x m") 'magit-status)
 (eval-after-load 'magit
   '(progn
      (define-key magit-mode-map (kbd "C-h") 'delete-backward-char)
