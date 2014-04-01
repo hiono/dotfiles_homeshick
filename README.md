@@ -6,19 +6,6 @@ Setting files for me.
 ## How to get
 
 `
-$ git clone https://github.com/hiono/dotfiles.git $HOME/.dotfiles
+$ homeshick -f -b clone https://github.com/hiono/dotfiles.git
 `
 
-## Usage
-
-`
-$ cd $HOME/.dorfiles
-$ ./relink.sh
-`
-
-OR force override.
-
-`
-$ cd $HOME/.dorfiles
-$ ./relink.sh -f
-`
