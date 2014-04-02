@@ -3,7 +3,7 @@ dotfiles
 
 Setting files for me.
 
-## HUsage
+## Usage
 `
 $ homeshick -f -b clone https://github.com/hiono/dotfiles.git
 `
