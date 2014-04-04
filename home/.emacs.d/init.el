@@ -107,6 +107,7 @@
     open-junk-file
     ace-jump-mode
     wgrep
+    adoc-mode
     ))
 
 (let ((not-installed (loop for x in installing-package-list
