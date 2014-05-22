@@ -106,7 +106,8 @@
     yaml-mode
     open-junk-file
     ace-jump-mode
-    wgrep
+    ag
+    wgrep-ag
     adoc-mode
     ))
 
