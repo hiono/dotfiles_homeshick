@@ -2,5 +2,5 @@
 
 declare -f homeshick > /dev/null
 if [[ $? == 0 ]];then
-   homeshick -q pull homeshick
+   homeshick -q check
 fi
