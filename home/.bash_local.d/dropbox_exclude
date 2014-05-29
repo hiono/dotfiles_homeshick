@@ -1,0 +1,18 @@
+#!/bin/bash
+
+PATH="$HOME/bin:$PATH"
+if [ -d $HOME/Dropbox ];then
+    dropbox.py running
+    if [[ $? == 1 ]];then
+        EXCLUDED_DIRS=$(mktemp)
+        NEW_DIRS=$(mktemp)
+        DIRS=$(mktemp)
+        (cd ;dropbox.py exclude list|grep -e "^Dropbox/") > ${EXCLUDED_DIRS}
+        (cd ;for d in $(find Dropbox/ -type f -name Vagrantfile | xargs dirname); do [ -d $d/.vagrant ]&& echo $d/.vagrant ;done) > ${NEW_DIRS}
+        (cat <(cat ${NEW_DIRS}|sort -u) <(join <(cat ${NEW_DIRS}|sort -u) <(cat ${EXCLUDED_DIRS}|sort -u) ) | sort | uniq -u) > ${DIRS}
+        if (( $(cat ${DIRS}|wc -l) > 0));then
+            dropbox.py exclude add $(cat ${DIRS})
+        fi
+        rm -f ${EXCLUDED_DIRS} ${NEW_DIRS} ${DIRS}
+    fi
+fi

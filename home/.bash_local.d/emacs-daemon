@@ -1,0 +1,6 @@
+# emacs
+if pgrep emacs >/dev/null 2>&1; then
+    : # echo "Emacs server is already running..."
+else # start emacs
+    `emacs --daemon`
+fi # end of emacs

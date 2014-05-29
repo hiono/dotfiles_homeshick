@@ -1,0 +1,2 @@
+###### vagrant
+export VAGRANT_DEFAULT_PROVIDER=lxc
