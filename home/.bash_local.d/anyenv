@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [ -d $HOME/.anyenv ] ; then
+    addpath -p PATH $HOME/.anyenv/bin
+    eval "$(anyenv init -)"
+fi
+for D in `ls $HOME/.anyenv/envs`
+do
+    addpath -p PATH $HOME/.anyenv/envs/$D/shims
+done
