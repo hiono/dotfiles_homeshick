@@ -125,7 +125,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;Magit
 (require 'magit)
-(setq magit-diff-options '("-b"))
+;; (setq magit-diff-options '("-b"))
 (define-key global-map (kbd "C-h m") 'magit-status)
 (define-key global-map (kbd "C-x m") 'magit-status)
 (eval-after-load 'magit
@@ -267,3 +267,4 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (message "Loaded")
+(put 'narrow-to-region 'disabled nil)
