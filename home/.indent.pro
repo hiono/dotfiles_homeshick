@@ -1,0 +1,13 @@
+--braces-on-if-line
+--braces-on-struct-decl-line
+--cuddle-else
+--no-tabs
+--space-after-cast
+--space-after-for
+--space-after-if
+--space-after-parentheses
+--space-after-procedure-calls
+--space-after-while
+--space-special-semicolon
+-l128
+-ppi2
