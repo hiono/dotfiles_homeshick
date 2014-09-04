@@ -246,6 +246,10 @@
 ;;           (require 'asciidoc)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; clang-format mode
+(load-file (expand-file-name "clang-format.el" (car (directory-files "/usr/share/emacs/site-lisp" t "clang-format-"))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; text-adjust mode
 (require 'text-adjust)
 
