@@ -247,7 +247,8 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; clang-format mode
-(load-file (expand-file-name "clang-format.el" (car (directory-files "/usr/share/emacs/site-lisp" t "clang-format-"))))
+(let ((d (directory-files "/usr/share/emacs/site-lisp" t "clang-format-")))
+  (cond (d (load (expand-file-name "clang-format" (car d))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; text-adjust mode
