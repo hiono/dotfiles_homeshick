@@ -100,6 +100,7 @@
     ;; ここに使っているパッケージを書く。
     ;; melpa ;; 2014-01-07辺りからErrorになったので外し
     magit
+    magit-gitflow
     gist
     markdown-mode
     google-c-style
@@ -148,6 +149,11 @@
 ;;     (magit-with-section redmine 'redmine
 ;;       (magit-set-section-info redmine)
 ;;       (forward-line))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;Magit-GitFlow
+(require 'magit-gitflow)
+(add-hook 'magit-mode-hook 'turn-on-magit-gitflow)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; gist
