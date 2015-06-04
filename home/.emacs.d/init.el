@@ -127,6 +127,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;Magit
 (require 'magit)
+(setq magit-auto-revert-mode nil)
+(setq magit-last-seen-setup-instructions "1.4.0")
 ;; (setq magit-diff-options '("-b"))
 (define-key global-map (kbd "C-h m") 'magit-status)
 (define-key global-map (kbd "C-x m") 'magit-status)
