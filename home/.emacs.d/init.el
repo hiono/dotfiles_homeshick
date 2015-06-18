@@ -280,5 +280,10 @@
 ;;     ad-do-it))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; emacs-mozc
+(when (require 'mozc nil t)
+  (setq default-input-method "japanese-mozc"))
+
 (message "Loaded")
 (put 'narrow-to-region 'disabled nil)
