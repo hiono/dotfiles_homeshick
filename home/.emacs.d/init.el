@@ -283,7 +283,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; emacs-mozc
 (when (require 'mozc nil t)
-  (setq default-input-method "japanese-mozc"))
+  (setq default-input-method "japanese-mozc")
+  (define-key global-map (kbd "C-\\") 'toggle-input-method)
+)
 
 (message "Loaded")
 (put 'narrow-to-region 'disabled nil)
