@@ -93,26 +93,19 @@
 
 ;; Initialize
 (package-initialize)
+(setq installing-package-list '(
+         markdown-mode
+         google-c-style
+         yaml-mode
+         open-junk-file))
+(when (executable-find "git")
+  (setq installing-package-list (append '(magit magit-gitflow gist git-gutter) installing-package-list)))
+(when (executable-find "ag")
+  (setq installing-package-list (append '(ag wgrep-ag) installing-package-list)))
+(when (executable-find "asciidoc")
+  (setq installing-package-list (append '(adoc-mode) installing-package-list)))
 
 (require 'cl)
-(defvar installing-package-list
-  '(
-    ;; ここに使っているパッケージを書く。
-    ;; melpa ;; 2014-01-07辺りからErrorになったので外し
-    magit
-    magit-gitflow
-    gist
-    markdown-mode
-    google-c-style
-    yaml-mode
-    open-junk-file
-    ace-jump-mode
-    ag
-    wgrep-ag
-    adoc-mode
-    git-gutter
-    ))
-
 (let ((not-installed (loop for x in installing-package-list
                             when (not (package-installed-p x))
                             collect x)))
@@ -121,54 +114,77 @@
     (dolist (pkg not-installed)
         (package-install pkg))))
 
-;; melpa.el (download後しか使えないからここに書く)
-;;(require 'melpa)
+(when (executable-find "emacsclient")
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; server start for emacs-client
+  (require 'server)
+  (unless (server-running-p)
+    (server-start))
+) ;; end of (executable-find "emacsclient")
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;Magit
-(require 'magit)
-(setq magit-auto-revert-mode nil)
-(setq magit-last-seen-setup-instructions "1.4.0")
-;; (setq magit-diff-options '("-b"))
-(define-key global-map (kbd "C-h m") 'magit-status)
-(define-key global-map (kbd "C-x m") 'magit-status)
-(eval-after-load 'magit
-  '(progn
-     (define-key magit-mode-map (kbd "C-h") 'delete-backward-char)
-     (set-face-background 'magit-diff-add "#222222")
-     (set-face-background 'magit-diff-del "#222222")
-     (set-face-foreground 'magit-diff-file-header "#0000ff")
-     (set-face-background 'magit-diff-file-header "#888888")
-     (set-face-foreground 'magit-log-head-label-bisect-skip "black")
-     (set-face-foreground 'magit-log-head-label-tags "black")
-     (set-face-foreground 'magit-log-reflog-label-commit "black")
-     (set-face-foreground 'magit-tag "black")
-     ))
-;; ;; for git-redmine
-;; (magit-define-inserter redmine ()
-;;   (magit-git-section 'redmine
-;;                      "Redmine:" 'redmine-tickets-function
-;;                      "redmine" "arg1"))
-;; (add-hook 'magit-before-stashes-hook 'magit-insert-redmine)
-;; (defun redmine-tickets-function ()
-;;   (let ((redmine (buffer-substring (line-beginning-position) (line-end-position))))
-;;     (goto-char (line-beginning-position))
-;;     (magit-with-section redmine 'redmine
-;;       (magit-set-section-info redmine)
-;;       (forward-line))))
+(when (executable-find "git")
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;;Magit
+  (require 'magit)
+  (setq magit-auto-revert-mode nil)
+  (setq magit-last-seen-setup-instructions "1.4.0")
+  ;; (setq magit-diff-options '("-b"))
+  (define-key global-map (kbd "C-h m") 'magit-status)
+  (define-key global-map (kbd "C-x m") 'magit-status)
+  (eval-after-load 'magit
+    '(progn
+       (define-key magit-mode-map (kbd "C-h") 'delete-backward-char)
+       (set-face-background 'magit-diff-add "#222222")
+       (set-face-background 'magit-diff-del "#222222")
+       (set-face-foreground 'magit-diff-file-header "#0000ff")
+       (set-face-background 'magit-diff-file-header "#888888")
+       (set-face-foreground 'magit-log-head-label-bisect-skip "black")
+       (set-face-foreground 'magit-log-head-label-tags "black")
+       (set-face-foreground 'magit-log-reflog-label-commit "black")
+       (set-face-foreground 'magit-tag "black")
+       ))
+  ;; ;; for git-redmine
+  ;; (magit-define-inserter redmine ()
+  ;;   (magit-git-section 'redmine
+  ;;                      "Redmine:" 'redmine-tickets-function
+  ;;                      "redmine" "arg1"))
+  ;; (add-hook 'magit-before-stashes-hook 'magit-insert-redmine)
+  ;; (defun redmine-tickets-function ()
+  ;;   (let ((redmine (buffer-substring (line-beginning-position) (line-end-position))))
+  ;;     (goto-char (line-beginning-position))
+  ;;     (magit-with-section redmine 'redmine
+  ;;       (magit-set-section-info redmine)
+  ;;       (forward-line))))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;Magit-GitFlow
-(require 'magit-gitflow)
-(add-hook 'magit-mode-hook 'turn-on-magit-gitflow)
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;;Magit-GitFlow
+  (require 'magit-gitflow)
+  (add-hook 'magit-mode-hook 'turn-on-magit-gitflow)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; gist
-(require 'gist)
-(setq gist-view-gist t)
-(setq github-user (magit-get "github.user"))
-(setq github-password (magit-get "github.password"))
-(setq github-token (magit-get "github.token"))
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; gist
+  (require 'gist)
+  (setq gist-view-gist t)
+  (setq github-user (magit-get "github.user"))
+  (setq github-password (magit-get "github.password"))
+  (setq github-token (magit-get "github.token"))
+) ;; end of (executable-find "git")
+
+(when (executable-find "ag")
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; ag & wgrep
+  (setq default-process-coding-system 'utf-8-unix)  ; ag 検索結果のエンコード指定
+  (require 'ag)
+  (setq ag-highlight-search t)  ; 検索キーワードをハイライト
+  (setq ag-reuse-buffers t)     ; 検索用バッファを使い回す (検索ごとに新バッファを作らない)
+                                        ; wgrep
+  (add-hook 'ag-mode-hook '(lambda ()
+                             (require 'wgrep-ag)
+                             (setq wgrep-auto-save-buffer t)  ; 編集完了と同時に保存
+                             (setq wgrep-enable-key "r")      ; "r" キーで編集モードに
+                             (wgrep-ag-setup)))
+
+  ) ;; end of (executable-find "ag")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; open-junk-file
@@ -186,26 +202,6 @@
 (setq recentf-auto-cleanup 'never) ;; tramp対策。
 (recentf-mode 1)
 (define-key global-map (kbd "C-c C-f") 'recentf-open-files)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; ag & wgrep
-; ag
-(setq default-process-coding-system 'utf-8-unix)  ; ag 検索結果のエンコード指定
-(require 'ag)
-(setq ag-highlight-search t)  ; 検索キーワードをハイライト
-(setq ag-reuse-buffers t)     ; 検索用バッファを使い回す (検索ごとに新バッファを作らない)
-; wgrep
-(add-hook 'ag-mode-hook '(lambda ()
-                           (require 'wgrep-ag)
-                           (setq wgrep-auto-save-buffer t)  ; 編集完了と同時に保存
-                           (setq wgrep-enable-key "r")      ; "r" キーで編集モードに
-                           (wgrep-ag-setup)))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; server start for emacs-client
-(require 'server)
-(unless (server-running-p)
-  (server-start))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; 行末の空白を削除
@@ -260,10 +256,10 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; asciidoc mode
-(add-to-list 'auto-mode-alist (cons "\\.asc\\'" 'adoc-mode))
-(add-to-list 'auto-mode-alist (cons "\\.asciidoc\\'" 'adoc-mode))
-(add-hook 'adoc-mode-hook (lambda() (buffer-face-mode t)))
-
+(when (executable-find "asciidoc")
+  (add-to-list 'auto-mode-alist (cons "\\.asc\\'" 'adoc-mode))
+  (add-to-list 'auto-mode-alist (cons "\\.asciidoc\\'" 'adoc-mode))
+  (add-hook 'adoc-mode-hook (lambda() (buffer-face-mode t))))
 ;; (autoload 'doc-mode "doc-mode" nil t)
 ;; (add-to-list 'auto-mode-alist '("\\.adoc$" . doc-mode))
 ;; (add-to-list 'auto-mode-alist '("\\.asc$" . doc-mode))
@@ -278,25 +274,18 @@
   (cond (d (load (expand-file-name "clang-format" (car d))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; google-c-style
+(cond ((require 'google-c-style nil t)
+       (defun my-c-c++-mode-init ()
+         (google-set-c-style)
+         ;; (google-make-newline-indent)
+         )
+(add-hook 'c-mode-hook 'my-c-c++-mode-init)
+(add-hook 'c++-mode-hook 'my-c-c++-mode-init)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; text-adjust mode
 (require 'text-adjust)
-
-;; fix code ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; debian-wheezy等ではemacs24に問題あるため
-;; (defadvice package--add-to-archive-contents
-;;   (around package-filter-add-to-archive-contents (package archive)
-;;           activate compile)
-;;   "Add filtering of available packages using `package-filter-function', if non-nil."
-;;   (when (and package-filter-function
-;;              (funcall package-filter-function
-;;                       (car package)
-;;                     (or (ignore-errors ; < 24.3.50
-;;                           (package-desc-vers (cdr package)))
-;;                         (ignore-errors ; >= 24.3.50
-;;                           (package-desc-version (cdr package))))
-;;                       archive))
-;;     ad-do-it))
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; japanese inputmehod
