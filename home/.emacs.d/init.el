@@ -252,6 +252,13 @@
              (set (make-local-variable 'whitespace-action) nil)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; ispell mode
+(when (executable-find "aspell")
+  (setq-default ispell-program-name "aspell")
+  (eval-after-load "ispell"
+    '(add-to-list 'ispell-skip-region-alist '("[^\000-\377]+"))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; asciidoc mode
 (add-to-list 'auto-mode-alist (cons "\\.asc\\'" 'adoc-mode))
 (add-to-list 'auto-mode-alist (cons "\\.asciidoc\\'" 'adoc-mode))
