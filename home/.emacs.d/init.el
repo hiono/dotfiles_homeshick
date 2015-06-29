@@ -251,6 +251,7 @@
 ;; ispell mode
 (when (executable-find "aspell")
   (setq-default ispell-program-name "aspell")
+  (require 'ispell)
   (eval-after-load "ispell"
     '(add-to-list 'ispell-skip-region-alist '("[^\000-\377]+"))))
 
