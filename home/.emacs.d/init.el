@@ -292,12 +292,12 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; number
 (require 'number)
-(global-set-key (kbd "C-c C-+") 'number/add)
-(global-set-key (kbd "C-c C--") 'number/sub)
-(global-set-key (kbd "C-c C-*") 'number/multiply)
-(global-set-key (kbd "C-c C-/") 'number/divide)
-(global-set-key (kbd "C-c C-0") 'number/pad)
-(global-set-key (kbd "C-c C-=") 'number/eval)
+;; (global-set-key (kbd "C-c M-+") 'number/add)
+;; (global-set-key (kbd "C-c M--") 'number/sub)
+;; (global-set-key (kbd "C-c M-*") 'number/multiply)
+;; (global-set-key (kbd "C-c M-/") 'number/divide)
+;; (global-set-key (kbd "C-c M-0") 'number/pad)
+;; (global-set-key (kbd "C-c M-=") 'number/eval)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; japanese inputmehod
