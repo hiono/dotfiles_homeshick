@@ -97,7 +97,10 @@
          markdown-mode
          google-c-style
          yaml-mode
-         open-junk-file))
+         open-junk-file
+         dired-filter ;; diredでディレクトリ・特定の拡張子・ファイル名の正規表現にマッチしたもののみを表示 http://rubikitch.com/2015/04/07/dired-filter/
+         number ;; カーソル位置の数字に対して簡単な計算をしたり形式を整えたり http://rubikitch.com/2015/06/21/number/
+         ))
 (when (executable-find "git")
   (setq installing-package-list (append '(magit magit-gitflow gist git-gutter) installing-package-list)))
 (when (executable-find "ag")
@@ -285,6 +288,16 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; text-adjust mode
 (require 'text-adjust)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; number
+(require 'number)
+(global-set-key (kbd "C-c C-+") 'number/add)
+(global-set-key (kbd "C-c C--") 'number/sub)
+(global-set-key (kbd "C-c C-*") 'number/multiply)
+(global-set-key (kbd "C-c C-/") 'number/divide)
+(global-set-key (kbd "C-c C-0") 'number/pad)
+(global-set-key (kbd "C-c C-=") 'number/eval)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; japanese inputmehod
