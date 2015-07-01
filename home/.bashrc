@@ -9,8 +9,8 @@ case $- in
 esac
 
 # LC
-LC_TIME=C
-LC_ALL=C
+LC_TIME=posix
+LC_ALL=posix
 
 # TimeZone
 TZ=JST-9
