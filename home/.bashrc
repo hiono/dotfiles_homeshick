@@ -10,7 +10,7 @@ esac
 
 # LC
 LC_TIME=posix
-LC_ALL=posix
+LC_ALL=C
 
 # TimeZone
 TZ=JST-9
