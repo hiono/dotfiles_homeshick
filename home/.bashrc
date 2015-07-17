@@ -10,7 +10,8 @@ esac
 
 # LC
 LC_TIME=C
-LC_ALL=C
+LC_ALL=ja_JP.utf8
+LANG=ja_JP.utf8
 
 # TimeZone
 TZ=JST-9
