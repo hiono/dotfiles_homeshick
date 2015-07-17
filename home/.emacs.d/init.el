@@ -137,14 +137,14 @@
   (eval-after-load 'magit
     '(progn
        (define-key magit-mode-map (kbd "C-h") 'delete-backward-char)
-       (set-face-background 'magit-diff-add "#222222")
-       (set-face-background 'magit-diff-del "#222222")
-       (set-face-foreground 'magit-diff-file-header "#0000ff")
-       (set-face-background 'magit-diff-file-header "#888888")
-       (set-face-foreground 'magit-log-head-label-bisect-skip "black")
-       (set-face-foreground 'magit-log-head-label-tags "black")
-       (set-face-foreground 'magit-log-reflog-label-commit "black")
-       (set-face-foreground 'magit-tag "black")
+       ;; (set-face-background 'magit-diff-add "#222222")
+       ;; (set-face-background 'magit-diff-del "#222222")
+       ;; (set-face-foreground 'magit-diff-file-header "#0000ff")
+       ;; (set-face-background 'magit-diff-file-header "#888888")
+       ;; (set-face-foreground 'magit-log-head-label-bisect-skip "black")
+       ;; (set-face-foreground 'magit-log-head-label-tags "black")
+       ;; (set-face-foreground 'magit-log-reflog-label-commit "black")
+       ;; (set-face-foreground 'magit-tag "black")
        ))
   ;; ;; for git-redmine
   ;; (magit-define-inserter redmine ()
