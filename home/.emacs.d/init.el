@@ -100,6 +100,7 @@
          open-junk-file
          dired-filter ;; diredでディレクトリ・特定の拡張子・ファイル名の正規表現にマッチしたもののみを表示 http://rubikitch.com/2015/04/07/dired-filter/
          number ;; カーソル位置の数字に対して簡単な計算をしたり形式を整えたり http://rubikitch.com/2015/06/21/number/
+	 wsd-mode ;; Emacsだけでシーケンス図を書く。リアルタイムに確認も - Qiita http://qiita.com/scalper/items/90dded0a02a4afab0d7d
          ))
 (when (executable-find "git")
   (setq installing-package-list (append '(magit magit-gitflow gist git-gutter) installing-package-list)))
