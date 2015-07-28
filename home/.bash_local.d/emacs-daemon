@@ -1,6 +1,12 @@
-# emacs
+#!/bin/bash
+
+# emacs daemon start
 if pgrep emacs >/dev/null 2>&1; then
     : # echo "Emacs server is already running..."
 else # start emacs
-    `emacs --daemon`
+    if $(cat /proc/self/cgroup | grep -q docker); then
+        : # echo "This environment is container"
+    else
+        `emacs --daemon`
+    fi
 fi # end of emacs

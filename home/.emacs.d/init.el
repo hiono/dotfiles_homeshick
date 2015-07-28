@@ -117,7 +117,14 @@
     (dolist (pkg not-installed)
         (package-install pkg))))
 
-(when (executable-find "emacsclient")
+(when
+    (and
+     (executable-find "emacsclient")
+     (=
+      (with-temp-buffer
+        (call-process "/bin/bash" nil (current-buffer) nil "-c" "cat /proc/self/cgroup | grep cpu:/docker")
+        )
+      0))
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; server start for emacs-client
   (require 'server)
