@@ -1,2 +1,4 @@
+#!/bin/bash
+
 ###### vagrant
-export VAGRANT_DEFAULT_PROVIDER=lxc
+which vagrant >/dev/null 2>&1 && export VAGRANT_DEFAULT_PROVIDER=lxc
