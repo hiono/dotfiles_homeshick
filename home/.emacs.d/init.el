@@ -94,6 +94,7 @@
 ;; Initialize
 (package-initialize)
 (setq installing-package-list '(
+         auto-complete
          markdown-mode
          google-c-style
          yaml-mode
@@ -131,6 +132,11 @@
   (unless (server-running-p)
     (server-start))
 ) ;; end of (executable-find "emacsclient")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; auto-complete
+(require 'auto-complete-config)
+(ac-config-default)
 
 (when (executable-find "git")
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
