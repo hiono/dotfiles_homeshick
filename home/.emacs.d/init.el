@@ -118,6 +118,8 @@
     (dolist (pkg not-installed)
         (package-install pkg))))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; server start for emacs-client
 (when
     (and
      (executable-find "emacsclient")
@@ -126,8 +128,6 @@
         (call-process "/bin/bash" nil (current-buffer) nil "-c" "cat /proc/self/cgroup | grep cpu:/docker")
         )
       0))
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;; server start for emacs-client
   (require 'server)
   (unless (server-running-p)
     (server-start))
