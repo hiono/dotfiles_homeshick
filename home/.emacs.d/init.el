@@ -292,12 +292,14 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; auto-complete c/c++ headers
-(cond ((require 'auto-complete-c-headers nil t)
-       (defun my:ac-c-headers-init ()
-         (add-to-list 'ac-sources 'ac-source-c-headers)
-         )
-       (add-hook 'c++-mode-hook 'my:ac-c-headers-init)
-       (add-hook 'c-mode-hook 'my:ac-c-headers-init)))
+(cond
+ ((require 'ac-c-headers nil t)
+  (defun my:ac-c-headers-init ()
+    (add-to-list 'ac-sources 'ac-source-c-headers)
+    (add-to-list 'ac-sources 'ac-source-c-header-symbols t)
+    )
+  (add-hook 'c++-mode-hook 'my:ac-c-headers-init)
+  (add-hook 'c-mode-hook 'my:ac-c-headers-init)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; google-c-style
