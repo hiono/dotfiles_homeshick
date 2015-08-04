@@ -303,13 +303,14 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; google-c-style
-(cond ((require 'google-c-style nil t)
-       (defun my-c-c++-mode-init ()
-         (google-set-c-style)
-         ;; (google-make-newline-indent)
-         )
-(add-hook 'c-mode-hook 'my-c-c++-mode-init)
-(add-hook 'c++-mode-hook 'my-c-c++-mode-init)))
+(cond
+ ((require 'google-c-style nil t)
+  (defun my:c-c++-mode-init ()
+    (google-set-c-style)
+    ;; (google-make-newline-indent)
+    )
+  (add-hook 'c-mode-hook 'my:c-c++-mode-init)
+  (add-hook 'c++-mode-hook 'my:c-c++-mode-init)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; text-adjust mode
