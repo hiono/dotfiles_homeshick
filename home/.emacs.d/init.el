@@ -95,6 +95,7 @@
 (package-initialize)
 (setq installing-package-list '(
          auto-complete
+         ac-c-headers
          markdown-mode
          google-c-style
          yaml-mode
@@ -288,6 +289,15 @@
 ;; clang-format mode
 (let ((d (directory-files "/usr/share/emacs/site-lisp" t "clang-format-")))
   (cond (d (load (expand-file-name "clang-format" (car d))))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; auto-complete c/c++ headers
+(cond ((require 'auto-complete-c-headers nil t)
+       (defun my:ac-c-headers-init ()
+         (add-to-list 'ac-sources 'ac-source-c-headers)
+         )
+       (add-hook 'c++-mode-hook 'my:ac-c-headers-init)
+       (add-hook 'c-mode-hook 'my:ac-c-headers-init)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; google-c-style
