@@ -104,6 +104,10 @@
          number ;; カーソル位置の数字に対して簡単な計算をしたり形式を整えたり http://rubikitch.com/2015/06/21/number/
          ddskk
          ))
+
+(when (string-match ".*/dockerdev$" (getenv "HOME"))
+  (add-to-list 'installing-package-list 'gruber-darker-theme t))
+
 (when (executable-find "git")
   (setq installing-package-list (append '(magit magit-gitflow gist git-gutter) installing-package-list)))
 (when (executable-find "ag")
@@ -119,6 +123,11 @@
     (package-refresh-contents)
     (dolist (pkg not-installed)
         (package-install pkg))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; load theme for docker
+(when (string-match ".*/dockerdev$" (getenv "HOME"))
+  (load-theme 'gruber-darker t))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; server start for emacs-client
