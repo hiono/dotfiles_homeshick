@@ -96,6 +96,7 @@
 (setq installing-package-list '(
          auto-complete
          ac-c-headers
+         auto-complete-rst
          markdown-mode
          google-c-style
          yaml-mode
