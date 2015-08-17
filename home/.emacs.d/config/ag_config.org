@@ -1,4 +1,4 @@
-#(((( -*- mode: org; coding: utf-8-unix; indent-tabs-mode: nil -*-
+# -*- mode: org; coding: utf-8-unix; indent-tabs-mode: nil -*-
 #+TITLE: Ag の設定
 #+AUTHOR: Hiroyuki Ono
 #+EMAIL: bps@sculd.com
