@@ -10,7 +10,7 @@ esac
 
 # LC
 export LC_TIME=C
-export LC_ALL=ja_JP.utf8
+unset LC_ALL
 export LANG=ja_JP.utf8
 
 # TimeZone
