@@ -1,0 +1,54 @@
+# -*- mode: org; coding: utf-8-unix; indent-tabs-mode: nil -*-
+#+TITLE: AutoComplete の設定
+#+AUTHOR: Hiroyuki Ono
+#+EMAIL: bps@sculd.com
+#+DATE: 2015-08-17 13:28:22
+#+LANG: ja
+#+LAYOUT: page
+#+CATEGORIES: emacs
+#+PERMALINK: config/auto-complete.html
+* 始めに
+  [[http://auto-complete.org/][Auto Complete Mode]] [fn:1] を参照のこと.
+  =Org-mode= や =yasnippet= と共存させようとすると結構面倒.
+  ここで設定しているのはそういうお話.
+* 読み込みと初期設定
+
+  #+BEGIN_SRC emacs-lisp
+    (use-package auto-complete-config
+      :quelpa (auto-complete :fetcher github :repo "auto-complete/auto-complete")
+      :commands (ac-next ac-previous)
+      :init
+      ;; '<s'補完などを使うために 4 文字以上で起動することに
+      (setq ac-auto-start 4)                         ; 4 文字以上で起動
+      (setq ac-auto-show-menu 0.8)                   ; 0.8 秒でメニュー表示
+      (setq ac-use-comphist t)                       ; 補完候補をソート
+      (setq ac-candidate-limit nil)                  ; 補完候補表示を無制限に
+      (setq ac-use-quick-help nil)                   ; tool tip 無し
+      (setq ac-use-menu-map t)                       ; キーバインド
+      ;; 補完メニュー表示時には C-n/C-p で選択.
+      (setf (symbol-function 'yas-active-keys)
+            (lambda ()
+              (remove-duplicates
+               (mapcan #'yas--table-all-keys (yas--get-snippet-tables)))))
+      :config
+      (bind-keys :map ac-menu-map
+                 ("C-n" . ac-next)
+                 ("C-p" . ac-previous))
+      (bind-keys :map ac-completing-map
+                 ("<tab>" . nil)
+                 ("RET" . nil) ; return での補完禁止
+                 ("M-/" . ac-stop))
+      (add-to-list 'ac-dictionary-directories (concat my:share-dir "ac-dict"))
+      (setq ac-comphist-file (concat my:temp-dir "ac-comphist.dat"))
+      (ac-config-default)
+      (ac-flyspell-workaround)
+      ;; 全てのモードで補完を有効に
+      (global-auto-complete-mode t)
+      ;; 追加メジャーモード
+      (add-to-list 'ac-modes 'org-mode)
+      )
+  #+END_SRC
+
+* Footnotes
+
+[fn:1] Auto Complete Mode: http://auto-complete.org/

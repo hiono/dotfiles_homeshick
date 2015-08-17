@@ -1,0 +1,210 @@
+# -*- mode: org; coding: utf-8-unix; indent-tabs-mode: nil -*-
+#+TITLE: Emacs の基本設定
+#+AUTHOR: Hiroyuki Ono
+#+EMAIL: bps@sculd.com
+#+DATE: 2015-08-17 13:24:58
+#+LANG: ja
+#+LAYOUT: page
+#+CATEGORIES: emacs
+#+PERMALINK: EmacsBasic.html
+* はじめに
+ 基本方針は以下の通り:
+** Emacs のパケージは [[http://tapoueh.org/emacs/el-get.html][Package]] で管理する.
+** 設定は [[http://orgmode.org/][Org mode]] で書きたい
+   設定は [[http://orgmode.org/worg/org-contrib/babel/intro.html][Babel: Introduction]] で書きます.
+* =~/.emacs.d/init.el= の生成
+  本ファイル (=README.org=) から,
+  Makefile 内の以下のスクリプトで =~/.emacs.d/init.el= を生成し, byte-compile します.
+
+  #+BEGIN_SRC makefile
+    %.elc: %.el
+    	$(EMACS) -l $< -batch -f batch-byte-compile $<
+    init.el: README.org
+    	emacs -Q --batch -l "ob-tangle" --eval "(org-babel-tangle-file \"$<\" \"$@\" \"emacs-lisp\"))"
+  #+END_SRC
+
+* ディレクトリ構成
+  分割した設定ファイル群や Package で install したパッケージの置き場所は
+  =user-emacs-directory= 以下.
+
+  ディレクトリ構成は以下:
+  #+BEGIN_EXAMPLE
+    ~/.emacs.d/
+     |-- Makefile        ←  byte-compile 用の rule
+     |-- README.org      ←  本ファイル. `org-babel-tangle' で init.el を生成
+     |-- config/         ←  分割された設定ファイル群
+     |-- elpa/           ←  package で install されるパッケージの置き場所
+     |-- share/          ←  Emacs lisp が使用する (いじらない) ソースなど
+     `-- tmp/            ←  一次ファイル置き場
+  #+END_EXAMPLE
+  上記ディレクトリ構成を設定ファイルで使用するためにディレクトリ配置を宣言しておきます.
+
+  #+BEGIN_SRC emacs-lisp
+    (when load-file-name
+      (setq user-emacs-directory (file-name-directory load-file-name)))
+    (defconst my:share-dir
+      (expand-file-name "share/" user-emacs-directory))
+    (defconst my:config-dir
+      (expand-file-name "config/" user-emacs-directory))
+    (defconst my:temp-dir
+      (expand-file-name "tmp/" user-emacs-directory))
+  #+END_SRC
+
+* byte-compile 用の設定
+** debug は表示しない: 必要に応じて t に変更する
+
+   #+BEGIN_SRC emacs-lisp
+     (setq debug-on-error nil)
+   #+END_SRC
+
+** =.elc= と =.el= の timestamp を比較し, 新しい方を読み込む
+
+   #+BEGIN_SRC emacs-lisp
+     (when (boundp 'load-prefer-newer)
+       (setq load-prefer-newer t))
+   #+END_SRC
+
+** 常に cl を読み込む
+
+   #+BEGIN_SRC emacs-lisp
+     (eval-and-compile (require 'cl))
+   #+END_SRC
+
+** Compile-Log の非表示
+
+   #+BEGIN_SRC emacs-lisp
+     (let ((win (get-buffer-window "*Compile-Log*")))
+       (when win (delete-window win)))
+   #+END_SRC
+
+** Warning の抑制
+
+   #+BEGIN_SRC emacs-lisp
+     (setq byte-compile-warnings
+           '(not
+             free-vars
+             unresolved
+             callargs
+             redefine
+             obsolete
+             noruntime
+             cl-functions
+             interactive-only
+             make-local
+             ))
+   #+END_SRC
+
+* Package
+** インストールしたパッケージの置き場所
+   パッケージ関連は =~/.emacs.d/packages/elpa= に
+   quelpa 関連は =~/.emacs.d/packages/quelpa= に
+
+   #+BEGIN_SRC emacs-lisp
+     (let ((my:package-dir (locate-user-emacs-file "packages")))
+       (setq package-user-dir (expand-file-name "elpa" my:package-dir))
+       (setq quelpa-dir (expand-file-name "quelpa" my:package-dir)))
+   #+END_SRC
+
+** quelpa
+   quelpa のロード
+
+   #+BEGIN_SRC emacs-lisp
+     (package-initialize)
+     (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+     (if (require 'quelpa nil t)
+         (quelpa-self-upgrade)
+       (with-temp-buffer
+         (url-insert-file-contents "https://raw.github.com/quelpa/quelpa/master/bootstrap.el")
+         (eval-buffer)))
+     (quelpa
+      '(quelpa-use-package
+        :fetcher github
+        :repo "quelpa/quelpa-use-package"))
+     (require 'quelpa-use-package)
+     (quelpa
+      '(quse-package
+        :fetcher github
+        :repo "jaccarmac/quse-package"))
+     (require 'quse-package)
+   #+END_SRC
+
+** byte-compile 用に with-eval-after-load-feature を install
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package
+       with-eval-after-load-feature
+       :quelpa ((with-eval-after-load-feature
+                    :fetcher github
+                    :repo "tarao/with-eval-after-load-feature-el")))
+   #+END_SRC
+
+* Org-Babel の設定
+** 読み込み
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package org)
+   #+END_SRC
+
+** org-mode での timestamp の変更
+   保存時の timestamp 更新に引っかける正規表現をちょっと変更. デフォルトでは $Lastupdate: …$ を使っているけれど, org-mode では +DATE: を引っかける.
+
+   #+BEGIN_SRC emacs-lisp
+     (defun my:org-timestamp-hook ()
+       "Change `time-stamp-start' in org-mode"
+       (set (make-local-variable 'time-stamp-format) "%:y-%02m-%02d %02H:%02M:%02S")
+       (set (make-local-variable 'time-stamp-start) "^#\\+DATE: ")
+       (set (make-local-variable 'time-stamp-end) "$")
+       )
+     (add-hook 'org-mode-hook 'my:org-timestamp-hook)
+     (add-hook 'before-save-hook 'time-stamp)
+    #+END_SRC
+
+** 埋め込みソースの編集
+
+   =#+BEGIN_SRC= ~ =#+END_SRC= の中で =C-c '= を実行すると,別ウィンドウが表示されてソース編集モードになり,このウィンドウ内では言語用のモードを使うことができる
+
+** org-babel-tangle → byte-compile → load
+   org ファイルを引数で渡すと,
+   timestamp を比較し, 必要に応じて =org-babel-tangle= で ".el" を抽出
+   → byte-compile した後に load する関数の定義
+   設定ファイルは =<user-emacs-directory>/config= 以下に置くことに決め打ち.
+
+   #+BEGIN_SRC emacs-lisp
+     (defun my:org-babel-tangle-and-compile-file (file)
+       (interactive "fFile to load: ")
+       (let* ((base-name file) ; (file-name-sans-extension file))
+              (exported-file (concat base-name ".el"))
+              (compiled-file (concat base-name ".elc")))
+         (unless (and (file-exists-p compiled-file)
+                      (file-newer-than-file-p exported-file base-name))
+           (org-babel-tangle-file (concat file ".org") exported-file "emacs-lisp")
+           (byte-compile-file exported-file))))
+     (defun my:load-org-file (file)
+       (interactive "fFile to load: ")
+       (let* ((config (expand-file-name file my:config-dir)))
+         (my:org-babel-tangle-and-compile-file config)
+         (load (file-name-sans-extension config))))
+   #+END_SRC
+
+** 実際に設定ファイルを load する
+   設定の詳細は [[file:config/index.org][Emacs の設定 - 主に org ファイルの読み込み集]] を参照
+
+   #+BEGIN_SRC emacs-lisp
+     (my:load-org-file "index")
+   #+END_SRC
+
+* Copyright & License
+  #+BEGIN_EXAMPLE
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+    .
+    This package is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+    .
+    You should have received a copy of the GNU General Public License
+    along with this program. If not, see <http://www.gnu.org/licenses/>.
+  #+END_EXAMPLE

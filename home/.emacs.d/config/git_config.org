@@ -1,0 +1,41 @@
+# -*- mode: org; coding: utf-8-unix; indent-tabs-mode: nil -*-
+#+TITLE: Git の設定
+#+AUTHOR: Hiroyuki Ono
+#+EMAIL: bps@sculd.com
+#+DATE: 2015-08-17 13:24:58
+#+LANG: ja
+#+LAYOUT: page
+#+CATEGORIES: emacs
+#+PERMALINK: config/git_config.html
+* 始めに
+  =git= に関連した設定
+* git をインストール
+
+  #+BEGIN_SRC emacs-lisp
+    (use-package magit
+      :quelpa
+      :if (executable-find "git")
+      :commands (magit-status)
+      :bind (("C-x m" . magit-status))
+      :config
+      (bind-keys :map magit-mode-map ("C-h" . delete-backward-char))
+      (setq magit-auto-revert-mode t)
+      (setq magit-last-seen-setup-instructions "1.4.0")
+      ;; (setq magit-diff-options '("-b"))
+      ;; (set-face-background 'magit-diff-add "#222222")
+      ;; (set-face-background 'magit-diff-del "#222222")
+      ;; (set-face-foreground 'magit-diff-file-header "#0000ff")
+      ;; (set-face-background 'magit-diff-file-header "#888888")
+      ;; (set-face-foreground 'magit-log-head-label-bisect-skip "black")
+      ;; (set-face-foreground 'magit-log-head-label-tags "black")
+      ;; (set-face-foreground 'magit-log-reflog-label-commit "black")
+      ;; (set-face-foreground 'magit-tag "black")
+      )
+    (use-package magit-gitflow
+      :quelpa
+      :if (executable-find "git-flow")
+      :requires magit
+      :init
+      (add-hook 'magit-mode-hook 'turn-on-magit-gitflow)
+      )
+  #+END_SRC

@@ -1,0 +1,123 @@
+# -*- mode: org; coding: utf-8-unix; indent-tabs-mode: nil -*-
+#+TITLE: Emacs の基本設定
+#+AUTHOR: Hiroyuki Ono
+#+EMAIL: bps@sculd.com
+#+DATE: 2015-08-17 15:09:55
+#+LANG: ja
+#+LAYOUT: page
+#+CATEGORIES: emacs
+#+PERMALINK: emage/EmacsBasic.html
+* 始めに
+  ~/.emacs.d/init.el= から最初に読み込まれるファイル.
+  このファイルで設定ファイルの読み込みを行なう.
+  具体的な設定例は, 個々のファイルを参照のこと.
+
+* [[config/basic_config.org][環境に依存しない設定]]
+
+  #+BEGIN_SRC emacs-lisp
+    (my:load-org-file "basic_config")
+  #+END_SRC
+
+* [[file:config/language_config.org][言語の設定]]
+  Emacs23 から内部が Unicode ベース.
+
+  しかし文字コードの変換は GNU libc の iconv をベースにしているため, 環境によっては文字の変換がうまく行なえません.
+  そこで言語設定前に =cp5022x.el= をインストール.
+
+  #+BEGIN_SRC emacs-lisp
+    (use-package cp5022x
+      :quelpa (cp5022x :fetcher github :repo "awasira/cp5022x.el")
+      :config
+      (my:load-org-file "language_config"))
+  #+END_SRC
+
+* 日本語入力: [[file:config/ddskk_config.org][DDSKK の設定]]
+  [[http://openlab.ring.gr.jp/skk/ddskk-ja.html][Daredevil SKK (DDSKK)]] をメインで使用中.
+  ちなみに GTK が有効になっていると =gtk-immodule= なんかと衝突するので =~/.Xresources= で xim を無効に.
+  例えば以下の様に:
+  #+BEGIN_EXAMPLE
+     ! disable XIM
+     Emacs*useXIM: false
+  #+END_EXAMPLE
+  インストールはパッケージから.
+
+  #+BEGIN_SRC emacs-lisp
+    (my:load-org-file (concat my:config-dir "ddskk_config"))
+  #+END_SRC
+
+* テーマ
+  gruber-darker-theme
+
+  #+BEGIN_SRC emacs-lisp
+    (use-package gruber-darker-theme
+      :quelpa
+      :if (window-system)
+      :config
+      (load-theme 'gruber-darker t)
+      )
+  #+END_SRC
+
+* フォントの設定
+  Ricty を使用
+
+  #+BEGIN_SRC emacs-lisp
+    (if (window-system)
+        (progn
+          (add-to-list 'default-frame-alist '(font . "Ricty Diminished-13.5"))
+          (custom-set-faces
+           '(variable-pitch ((t (:family "Ricty Diminished Discord"))))
+           '(fixed-pitch ((t (:family "Ricty Diminished Discord"))))
+           )))
+  #+END_SRC
+
+* git の設定
+  Magit を使用
+
+  #+BEGIN_SRC emacs-lisp
+    (my:load-org-file (concat my:config-dir "git_config"))
+  #+END_SRC
+
+* ag の設定
+  silverlight-searcher を使用
+
+  #+BEGIN_SRC emacs-lisp
+    (my:load-org-file (concat my:config-dir "ag_config"))
+  #+END_SRC
+
+* [[http://d.hatena.ne.jp/kiwanami/20110221/1298293727][パスワード管理: id-manager.el]]
+  インストールと設定は以下:
+
+  #+BEGIN_SRC emacs-lisp
+    (use-package id-manager
+      :disabled t
+      :quelpa (id-manager :fetcher github :repo "kiwanami/emacs-id-manager")
+      :bind  (("M-7" . id-manager))
+      :init
+      (setq idm-database-file
+          (expand-file-name
+           (concat (getenv "HOME") "/.gnupg/idm-db.gpg")))
+      :if (file-exists-p idm-database-file)
+      :config
+      (setq idm-clipboard-expire-time-sec 15))
+  #+END_SRC
+
+* auto-complete
+  auto-complete を使用
+
+  #+BEGIN_SRC emacs-lisp
+    (my:load-org-file (concat my:config-dir "auto-complete_config"))
+  #+END_SRC
+
+* ispell の設定
+  ispell を使用
+
+  #+BEGIN_SRC emacs-lisp
+    (my:load-org-file (concat my:config-dir "ispell_config"))
+  #+END_SRC
+
+* text-adjust の設定
+  text-adjust を使用
+
+  #+BEGIN_SRC emacs-lisp
+    (my:load-org-file (concat my:config-dir "text-adjust_config"))
+  #+END_SRC
