@@ -9,26 +9,26 @@ case $- in
 esac
 
 # LC
-LC_TIME=C
-LC_ALL=ja_JP.utf8
-LANG=ja_JP.utf8
+export LC_TIME=C
+export LC_ALL=ja_JP.utf8
+export LANG=ja_JP.utf8
 
 # TimeZone
-TZ=JST-9
+export TZ=JST-9
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
-HISTCONTROL=ignoreboth
+export HISTCONTROL=ignoreboth
 
 # append to the history file, don't overwrite it
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=9999
-HISTFILESIZE=9999
+export HISTSIZE=9999
+export HISTFILESIZE=9999
 
 # ignore histories
-HISTIGNORE='?:??:fg*:bg*:history*:pwd:ls:ls -l:cd:exit:tmux*:emacs:em .'
+export HISTIGNORE='?:??:fg*:bg*:history*:pwd:ls:ls -l:cd:exit:tmux*:emacs:em .'
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
