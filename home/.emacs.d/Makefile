@@ -6,11 +6,18 @@ ELC	?= $(SRC:%.org=%.elc)
 
 all: bootstrap $(EL) init.elc
 %.el: %.org
-	$(EMACS) -Q --batch --eval \
-	  "(progn \
-	     (require 'ob) \
-	     (require 'ob-tangle) \
-	     (org-babel-tangle-file \"$<\" \"$(patsubst config/%,%,$@)\" \"emacs-lisp\")))"
+	$(EMACS) -Q --batch \
+	  --eval "(progn \
+  (require 'ob) \
+  (require 'ob-tangle) \
+  (let ((ifile \"$<\") (ofile \"$@\")) \
+    (cond ((file-symlink-p ifile) \
+	   (let ((tempfile (expand-file-name (file-name-base ifile)))) \
+	       (copy-file (file-symlink-p ifile) tempfile t) \
+	       (org-babel-tangle-file tempfile ofile \"emacs-lisp\") \
+	       (delete-file tempfile) \
+	       )) \
+	  (t (org-babel-tangle-file ifile ofile  \"emacs-lisp\"))))))"
 bootstrap: tmp/.permission-stamp
 tmp/.permission-stamp: tmp/.skkdic-stamp
 	chmod 700 tmp
@@ -33,9 +40,16 @@ init.elc: init.el
 init.el: README.org
 	$(EMACS) -q --batch \
 	  --eval "(progn \
-	            (require 'ob) \
-	            (require 'ob-tangle) \
-	            (org-babel-tangle-file \"$<\" \"$@\" \"emacs-lisp\")))"
+  (require 'ob) \
+  (require 'ob-tangle) \
+  (let ((ifile \"$<\") (ofile \"$@\")) \
+    (cond ((file-symlink-p ifile) \
+	   (let ((tempfile (expand-file-name (file-name-base ifile)))) \
+	       (copy-file (file-symlink-p ifile) tempfile t) \
+	       (org-babel-tangle-file tempfile ofile \"emacs-lisp\") \
+	       (delete-file tempfile) \
+	       )) \
+	  (t (org-babel-tangle-file ifile ofile \"emacs-lisp\"))))))"
 clean:
 	rm -f $(EL) $(ELC)
 	rm -fr init.elc init.el
