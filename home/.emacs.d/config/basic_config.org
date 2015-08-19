@@ -2,7 +2,7 @@
 #+TITLE: 環境に依存しない設定
 #+AUTHOR: Hiroyuki Ono
 #+EMAIL: bps@sculd.com
-#+DATE: 2015-08-17 16:01:49
+#+DATE: 2015-08-19 13:30:20
 #+LANG: ja
 #+LAYOUT: page
 #+CATEGORIES: cc-env emacs
@@ -12,6 +12,12 @@
 
   ちなみに =line-number-mode= など「有効無効を toggle する関数」は,
   慣習的に =0= 以下の数字を指定すると明示的に無効化.
+* shellの設定
+
+  #+BEGIN_SRC emacs-lisp
+    (setq shell-file-name "/bin/bash")
+  #+END_SRC
+
 * キーバインドの設定
   既に手癖になってしまっているアレコレ.
   =[home]= と =[end]= は無いと途方に暮れます.
