@@ -2,7 +2,7 @@
 #+TITLE: Git の設定
 #+AUTHOR: Hiroyuki Ono
 #+EMAIL: bps@sculd.com
-#+DATE: 2015-08-17 13:24:58
+#+DATE: 2015-08-18 20:20:59
 #+LANG: ja
 #+LAYOUT: page
 #+CATEGORIES: emacs
@@ -34,7 +34,6 @@
     (use-package magit-gitflow
       :quelpa
       :if (executable-find "git-flow")
-      :requires magit
       :init
       (add-hook 'magit-mode-hook 'turn-on-magit-gitflow)
       )
