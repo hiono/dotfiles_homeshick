@@ -2,7 +2,7 @@
 #+TITLE: Emacs の基本設定
 #+AUTHOR: Hiroyuki Ono
 #+EMAIL: bps@sculd.com
-#+DATE: 2015-08-17 15:09:55
+#+DATE: 2015-08-19 11:26:49
 #+LANG: ja
 #+LAYOUT: page
 #+CATEGORIES: emacs
@@ -63,7 +63,7 @@
   #+BEGIN_SRC emacs-lisp
     (if (window-system)
         (progn
-          (add-to-list 'default-frame-alist '(font . "Ricty Diminished-13.5"))
+          (add-to-list 'default-frame-alist '(font . "Ricty Diminished-12"))
           (custom-set-faces
            '(variable-pitch ((t (:family "Ricty Diminished Discord"))))
            '(fixed-pitch ((t (:family "Ricty Diminished Discord"))))
