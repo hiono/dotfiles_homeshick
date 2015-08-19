@@ -62,12 +62,20 @@
 
   #+BEGIN_SRC emacs-lisp
     (if (window-system)
-        (progn
-          (add-to-list 'default-frame-alist '(font . "Ricty Diminished-12"))
-          (custom-set-faces
-           '(variable-pitch ((t (:family "Ricty Diminished Discord"))))
-           '(fixed-pitch ((t (:family "Ricty Diminished Discord"))))
-           )))
+        (set-frame-font "Ricty Diminished-12" t t))
+  #+END_SRC
+
+** How to list fonts
+
+  #+BEGIN_SRC emacs-lisp
+    ;; (print (font-family-list))
+  #+END_SRC
+
+** How to check if a font exist?
+
+  #+BEGIN_SRC emacs-lisp
+    ;; returns true if Symbola exists
+    ;; (member "Symbola" (font-family-list))
   #+END_SRC
 
 * git の設定
