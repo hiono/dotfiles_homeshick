@@ -1,0 +1,22 @@
+# -*- mode: org; coding: utf-8-unix; indent-tabs-mode: nil -*-
+#+TITLE: Cmake の設定
+#+AUTHOR: Hiroyuki Ono
+#+EMAIL: bps@sculd.com
+#+DATE: 2015-08-21 13:05:35
+#+LANG: ja
+#+LAYOUT: page
+#+CATEGORIES: emacs
+#+PERMALINK: config/cmake_config.html
+* 始めに
+  =cmake= に関連した設定
+* cmake-mode をインストール
+
+  #+BEGIN_SRC emacs-lisp
+    (use-package cmake-mode
+      :quelpa
+      :if (executable-find "cmake")
+      :commands cmake-mode
+      :mode (("CMakeLists\\.txt$" . cmake-mode)
+             ("\\.cmake$" . cmake-mode))
+      )
+  #+END_SRC

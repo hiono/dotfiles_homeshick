@@ -2,7 +2,7 @@
 #+TITLE: Emacs の基本設定
 #+AUTHOR: Hiroyuki Ono
 #+EMAIL: bps@sculd.com
-#+DATE: 2015-08-19 11:26:49
+#+DATE: 2015-08-21 13:02:29
 #+LANG: ja
 #+LAYOUT: page
 #+CATEGORIES: emacs
@@ -128,4 +128,11 @@
 
   #+BEGIN_SRC emacs-lisp
     (my:load-org-file (concat my:config-dir "text-adjust_config"))
+  #+END_SRC
+
+* cmake の設定
+  cmake が入っていたら cmake-mode を使用
+
+  #+BEGIN_SRC emacs-lisp
+    (my:load-org-file (concat my:config-dir "cmake_config"))
   #+END_SRC
