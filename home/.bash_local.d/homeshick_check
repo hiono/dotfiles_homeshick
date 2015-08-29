@@ -3,5 +3,5 @@
 if declare -f homeshick > /dev/null
 then
     homeshick -q -f refresh 1
-    homeshick -q check
+    homeshick -q -f check
 fi
