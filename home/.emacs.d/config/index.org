@@ -2,7 +2,7 @@
 #+TITLE: Emacs の基本設定
 #+AUTHOR: Hiroyuki Ono
 #+EMAIL: bps@sculd.com
-#+DATE: 2015-08-21 13:02:29
+#+DATE: 2015-09-02 10:53:53
 #+LANG: ja
 #+LAYOUT: page
 #+CATEGORIES: emacs
@@ -135,4 +135,10 @@
 
   #+BEGIN_SRC emacs-lisp
     (my:load-org-file (concat my:config-dir "cmake_config"))
+  #+END_SRC
+* ido-mode の設定
+  ido-mode を使用
+
+  #+BEGIN_SRC emacs-lisp
+    (my:load-org-file (concat my:config-dir "ido-mode_config"))
   #+END_SRC
