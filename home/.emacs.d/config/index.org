@@ -137,8 +137,8 @@
     (my:load-org-file (concat my:config-dir "cmake_config"))
   #+END_SRC
 * ido-mode の設定
-  ido-mode を使用
+  ido-mode ワンクッション入って使いにくいので利用中止
 
-  #+BEGIN_SRC emacs-lisp
-    (my:load-org-file (concat my:config-dir "ido-mode_config"))
-  #+END_SRC
+  # #+BEGIN_SRC emacs-lisp
+  #   (my:load-org-file (concat my:config-dir "ido-mode_config"))
+  # #+END_SRC
