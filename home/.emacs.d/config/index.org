@@ -2,7 +2,7 @@
 #+TITLE: Emacs の基本設定
 #+AUTHOR: Hiroyuki Ono
 #+EMAIL: bps@sculd.com
-#+DATE: 2015-09-02 10:53:53
+#+DATE: 2015-09-04 10:26:36
 #+LANG: ja
 #+LAYOUT: page
 #+CATEGORIES: emacs
@@ -50,10 +50,22 @@
 
   #+BEGIN_SRC emacs-lisp
     (use-package gruber-darker-theme
+      :disabled t
       :quelpa
       :if (window-system)
       :config
       (load-theme 'gruber-darker t)
+      )
+  #+END_SRC
+
+  ample-theme
+
+  #+BEGIN_SRC emacs-lisp
+    (use-package ample-theme
+      :quelpa
+      :if (window-system)
+      :config
+      (load-theme 'ample t)
       )
   #+END_SRC
 
