@@ -2,7 +2,7 @@
 #+TITLE: DDSKK の設定
 #+AUTHOR: Hiroyuki Ono
 #+EMAIL: bps@sculd.com
-#+DATE: 2015-08-17 16:48:25
+#+LASTUPDATE: 2015-10-23 15:01:45
 #+LANG: ja
 #+LAYOUT: page
 #+CATEGORIES: emacs

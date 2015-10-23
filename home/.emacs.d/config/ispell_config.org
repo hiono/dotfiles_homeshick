@@ -2,7 +2,7 @@
 #+TITLE: Ispell の設定
 #+AUTHOR: Hiroyuki Ono
 #+EMAIL: bps@sculd.com
-#+DATE: 2015-08-17 13:24:58
+#+LASTUPDATE: 2015-10-23 15:01:44
 #+LANG: ja
 #+LAYOUT: page
 #+CATEGORIES: emacs

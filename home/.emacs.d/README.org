@@ -2,7 +2,7 @@
 #+TITLE: Emacs の基本設定
 #+AUTHOR: Hiroyuki Ono
 #+EMAIL: bps@sculd.com
-#+DATE: 2015-08-17 13:24:58
+#+LASTUPDATE: 2015-10-23 15:01:08
 #+LANG: ja
 #+LAYOUT: page
 #+CATEGORIES: emacs
@@ -150,14 +150,16 @@
      (use-package org)
    #+END_SRC
 
-** org-mode での timestamp の変更
-   保存時の timestamp 更新に引っかける正規表現をちょっと変更. デフォルトでは $Lastupdate: …$ を使っているけれど, org-mode では +DATE: を引っかける.
+** TODO org-mode での timestamp の変更
+
+   Date の箇所に Version を埋め込むために設定を変更.
+   保存時の timestamp 更新に引っかける正規表現をちょっと変更. デフォルトでは $Lastupdate: …$ を使っているけれど, org-mode では LASTUPDATE: を引っかける.
 
    #+BEGIN_SRC emacs-lisp
      (defun my:org-timestamp-hook ()
        "Change `time-stamp-start' in org-mode"
        (set (make-local-variable 'time-stamp-format) "%:y-%02m-%02d %02H:%02M:%02S")
-       (set (make-local-variable 'time-stamp-start) "^#\\+DATE: ")
+       (set (make-local-variable 'time-stamp-start) "^#\\+LASTUPDATE: ")
        (set (make-local-variable 'time-stamp-end) "$")
        )
      (add-hook 'org-mode-hook 'my:org-timestamp-hook)

@@ -2,7 +2,7 @@
 #+TITLE: 環境に依存しない設定
 #+AUTHOR: Hiroyuki Ono
 #+EMAIL: bps@sculd.com
-#+DATE: 2015-08-19 13:30:20
+#+LASTUPDATE: 2015-10-23 15:01:45
 #+LANG: ja
 #+LAYOUT: page
 #+CATEGORIES: cc-env emacs
