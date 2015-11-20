@@ -2,6 +2,6 @@
 
 if declare -f homeshick > /dev/null
 then
-    homeshick -q -f refresh 1
-    homeshick -q -f check
+    homeshick -b -f refresh 1
+    homeshick -b -f check
 fi
