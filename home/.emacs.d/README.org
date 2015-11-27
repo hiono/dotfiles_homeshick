@@ -2,7 +2,7 @@
 #+TITLE: Emacs の基本設定
 #+AUTHOR: Hiroyuki Ono
 #+EMAIL: bps@sculd.com
-#+LASTUPDATE: 2015-10-23 15:01:08
+#+LASTUPDATE: 2015-11-26 11:37:23
 #+LANG: ja
 #+LAYOUT: page
 #+CATEGORIES: emacs
@@ -147,7 +147,7 @@
 ** 読み込み
 
    #+BEGIN_SRC emacs-lisp
-     (use-package org)
+     (use-package org :quelpa)
    #+END_SRC
 
 ** TODO org-mode での timestamp の変更
