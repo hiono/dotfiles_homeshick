@@ -1,1 +1,11 @@
-[ -n "${INSIDE_EMACS}" -a -f ~/.fzf.bash ] && source ~/.fzf.bash
+if [ ! -n "${INSIDE_EMACS}" -a -f ~/.fzf.bash ];then
+    source ~/.fzf.bash
+    # fe [FUZZY PATTERN] - Open the selected file with the default editor
+    #   - Bypass fuzzy finder if there's only one match (--select-1)
+    #   - Exit if there's no match (--exit-0)
+    function em() {
+        local file
+        file=$(fzf --query="$1" --select-1 --exit-0)
+        [ -n "$file" ] && emacsclient -c -t "$file"
+    }
+fi
