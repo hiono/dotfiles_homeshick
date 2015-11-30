@@ -1,0 +1,1 @@
+[ -n "${INSIDE_EMACS}" -a -f ~/.fzf.bash ] && source ~/.fzf.bash
