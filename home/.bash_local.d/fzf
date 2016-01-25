@@ -14,4 +14,8 @@ if [ ! -n "${INSIDE_EMACS}" -a -f ~/.fzf.bash ];then
             fi
         fi
     }
+    function tmux-session() {
+        ss=$(tmux list-sessions | fzf --select-1 --exit-0 | cut -f1 -d:)
+        [ -n $ss ] && tmux attach -t $ss || tmux
+    }
 fi
