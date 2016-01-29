@@ -2,7 +2,7 @@
 #+TITLE: Emacs の基本設定
 #+AUTHOR: Hiroyuki Ono
 #+EMAIL: bps@sculd.com
-#+LASTUPDATE: 2015-11-27 11:17:15
+#+LASTUPDATE: 2016-01-29 11:19:03
 #+LANG: ja
 #+LAYOUT: page
 #+CATEGORIES: emacs
@@ -74,10 +74,22 @@
 
   #+BEGIN_SRC emacs-lisp
     (use-package peacock-theme
+      :disabled t
       :quelpa
       :if (window-system)
       :config
       (load-theme 'peacock t)
+      )
+  #+END_SRC
+
+  flatland-black-theme
+
+  #+BEGIN_SRC emacs-lisp
+    (use-package flatland-black-theme
+      :quelpa
+      :if (window-system)
+      :config
+      (load-theme 'flatland-black t)
       )
   #+END_SRC
 
