@@ -2,7 +2,7 @@
 #+TITLE: Emacs の基本設定
 #+AUTHOR: Hiroyuki Ono
 #+EMAIL: bps@sculd.com
-#+LASTUPDATE: 2015-11-26 11:37:23
+#+LASTUPDATE: 2016-06-24 18:36:05
 #+LANG: ja
 #+LAYOUT: page
 #+CATEGORIES: emacs
@@ -23,6 +23,19 @@
     	emacs -Q --batch -l "ob-tangle" --eval "(org-babel-tangle-file \"$<\" \"$@\" \"emacs-lisp\"))"
   #+END_SRC
 
+* emacs version
+
+  #+BEGIN_SRC emacs-lisp
+    ;; emacs-version predicates
+    (setq emacs22-p (string-match "^22" emacs-version)
+          emacs23-p (string-match "^23" emacs-version)
+          emacs24-p (string-match "^24" emacs-version)
+          emacs25-p (string-match "^25" emacs-version)
+          emacs25.0-p (string-match "^25\.0" emacs-version)
+          emacs25.1-p (string-match "^25\.1" emacs-version)
+          emacs25.2-p (string-match "^25\.2" emacs-version)
+    )
+  #+END_SRC
 * ディレクトリ構成
   分割した設定ファイル群や Package で install したパッケージの置き場所は
   =user-emacs-directory= 以下.

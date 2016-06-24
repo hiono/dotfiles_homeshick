@@ -2,7 +2,7 @@
 #+TITLE: 環境に依存しない設定
 #+AUTHOR: Hiroyuki Ono
 #+EMAIL: bps@sculd.com
-#+LASTUPDATE: 2015-10-23 15:01:45
+#+LASTUPDATE: 2016-06-24 18:36:19
 #+LANG: ja
 #+LAYOUT: page
 #+CATEGORIES: cc-env emacs
@@ -46,15 +46,24 @@
 ** 対応する括弧を色付け
 
    #+BEGIN_SRC emacs-lisp
-     (show-paren-mode 1)                 ; 有効化
+     (show-paren-mode t)                 ; 有効化
      (setq show-paren-delay 0)           ; 初期値は 0.125
      (setq show-paren-style 'expression) ; 括弧内も強調表示
-     (set-face-attribute 'show-paren-match-face nil
-                         :background "#02023c" :foreground nil
-                         :underline "#ffff7f" :weight 'bold :bold t)
-     (set-face-attribute 'show-paren-mismatch-face nil
-                         :background "#3c0202" :foreground nil
-                         :underline "#ff4c4c" :weight 'bold :bold t)
+     (if emacs25.0-p
+	 (progn
+	   (set-face-attribute 'show-paren-match-face nil
+			       :background "#02023c" :foreground nil
+			       :underline "#ffff7f" :weight 'bold :bold t)
+	   (set-face-attribute 'show-paren-mismatch-face nil
+			       :background "#3c0202" :foreground nil
+			       :underline "#ff4c4c" :weight 'bold :bold t)
+	   (progn
+	     (set-face-attribute 'show-paren-match nil
+				 :background "#02023c" :foreground nil
+				 :underline "#ffff7f" :weight 'bold :bold t)
+	     (set-face-attribute 'show-paren-mismatch nil
+				 :background "#3c0202" :foreground nil
+				 :underline "#ff4c4c" :weight 'bold :bold t))))
    #+END_SRC
 
 ** 空白の表示: whitespace-mode
