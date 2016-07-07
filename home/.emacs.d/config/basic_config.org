@@ -2,7 +2,7 @@
 #+TITLE: 環境に依存しない設定
 #+AUTHOR: Hiroyuki Ono
 #+EMAIL: bps@sculd.com
-#+LASTUPDATE: 2016-06-24 18:36:19
+#+LASTUPDATE: 2016-07-07 13:48:29
 #+LANG: ja
 #+LAYOUT: page
 #+CATEGORIES: cc-env emacs
@@ -169,6 +169,15 @@
            (if (fboundp 'menu-bar-mode)
                (menu-bar-mode -1))
            (setq ring-bell-function 'ignore)))
+   #+END_SRC
+(set-face-foreground 'mode-line-inactive "gray30")
+
+** モードライン
+   アクティブでないモードラインの色を変える
+
+   #+BEGIN_SRC emacs-lisp
+   (set-face-foreground 'mode-line-inactive "gray10")
+   (set-face-background 'mode-line-inactive "gray70")
    #+END_SRC
 
 ** ディレクトリ関連
