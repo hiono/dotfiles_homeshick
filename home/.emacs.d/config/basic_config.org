@@ -2,7 +2,7 @@
 #+TITLE: 環境に依存しない設定
 #+AUTHOR: Hiroyuki Ono
 #+EMAIL: bps@sculd.com
-#+LASTUPDATE: 2016-07-07 13:52:34
+#+LASTUPDATE: 2016-07-07 13:55:05
 #+LANG: ja
 #+LAYOUT: page
 #+CATEGORIES: cc-env emacs
@@ -175,8 +175,7 @@
    アクティブでないモードラインの色を変える
 
    #+BEGIN_SRC emacs-lisp
-   (set-face-foreground 'mode-line-inactive "gray10")
-   (set-face-background 'mode-line-inactive "gray70")
+     (set-face-attribute 'mode-line-inactive nil :background "gray70" :foreground "gray10")
    #+END_SRC
 
 ** ディレクトリ関連
