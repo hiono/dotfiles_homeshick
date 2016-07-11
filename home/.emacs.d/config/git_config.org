@@ -2,7 +2,7 @@
 #+TITLE: Git の設定
 #+AUTHOR: Hiroyuki Ono
 #+EMAIL: bps@sculd.com
-#+LASTUPDATE: 2015-10-23 15:01:44
+#+LASTUPDATE: 2016-07-11 14:23:29
 #+LANG: ja
 #+LAYOUT: page
 #+CATEGORIES: emacs
@@ -21,11 +21,15 @@
       (bind-keys :map magit-mode-map ("C-h" . delete-backward-char))
       (setq magit-auto-revert-mode t)
       (setq magit-last-seen-setup-instructions "1.4.0")
-      ;; (setq magit-diff-options '("-b"))
-      ;; (set-face-background 'magit-diff-add "#222222")
-      ;; (set-face-background 'magit-diff-del "#222222")
-      ;; (set-face-foreground 'magit-diff-file-header "#0000ff")
-      ;; (set-face-background 'magit-diff-file-header "#888888")
+      (setq magit-diff-options '("-b"))
+      (set-face-attribute 'magit-diff-base nil :foreground "#ffffcc" :background (face-attribute 'default :background) :inverse-video nil)
+      (set-face-attribute 'magit-diff-base-highlight nil :foreground "#ffffcc" :background (face-attribute 'default :background) :weight 'bold :inverse-video t)
+      (set-face-attribute 'magit-diff-added-highlight nil :foreground "green" :background (face-attribute 'default :background) :weight 'bold :inverse-video nil)
+      (set-face-attribute 'magit-diff-removed nil :foreground "red" :background (face-attribute 'default :background) :inverse-video nil)
+      (set-face-attribute 'magit-diff-removed-highlight nil :foreground "red" :background (face-attribute 'default :background) :weight 'bold :inverse-video nil)
+      (set-face-attribute 'magit-diff-context nil :foreground "yellow" :background (face-attribute 'default :background) :inverse-video nil)
+      (set-face-attribute 'magit-diff-context-highlight nil :foreground "yellow" :background (face-attribute 'default :background) :weight 'bold :inverse-video nil)
+      (set-face-attribute 'magit-diff-file-heading nil :foreground "blue")
       ;; (set-face-foreground 'magit-log-head-label-bisect-skip "black")
       ;; (set-face-foreground 'magit-log-head-label-tags "black")
       ;; (set-face-foreground 'magit-log-reflog-label-commit "black")
