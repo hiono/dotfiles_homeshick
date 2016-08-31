@@ -17,7 +17,7 @@ all: bootstrap $(EL) init.elc
 	       (org-babel-tangle-file tempfile ofile \"emacs-lisp\") \
 	       (delete-file tempfile) \
 	       )) \
-	  (t (org-babel-tangle-file ifile ofile  \"emacs-lisp\"))))))"
+	  (t (org-babel-tangle-file ifile ofile  \"emacs-lisp\")))))"
 bootstrap: tmp/.permission-stamp
 tmp/.permission-stamp: tmp/.skkdic-stamp
 	chmod 700 tmp
@@ -49,7 +49,7 @@ init.el: README.org
 	       (org-babel-tangle-file tempfile ofile \"emacs-lisp\") \
 	       (delete-file tempfile) \
 	       )) \
-	  (t (org-babel-tangle-file ifile ofile \"emacs-lisp\"))))))"
+	  (t (org-babel-tangle-file ifile ofile \"emacs-lisp\")))))"
 clean:
 	rm -f $(EL) $(ELC)
 	rm -fr init.elc init.el
