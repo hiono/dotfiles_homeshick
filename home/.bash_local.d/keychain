@@ -1,0 +1,6 @@
+# keychain
+KEYCHAIN=$(which keychain)
+if [ $? -eq 0 ];then
+    ${KEYCHAIN} --nogui --quiet $HOME/.ssh/id_rsa
+    source ~/.keychain/$HOSTNAME-sh
+fi

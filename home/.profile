@@ -21,11 +21,11 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
-# keychain
-if [ ${SHLVL} -le 1 ];then
-    /usr/bin/keychain $HOME/.ssh/id_rsa
-    source ~/.keychain/$HOSTNAME-sh
-fi
+# # keychain
+# if [ ${SHLVL} -le 1 ];then
+#     /usr/bin/keychain --nogui --quiet $HOME/.ssh/id_rsa
+#     source ~/.keychain/$HOSTNAME-sh
+# fi
 
 # TERM
 export TERM=screen-256color
