@@ -1,0 +1,13 @@
+#!/bin/sh
+
+D=`emacs --version | sed -ne '1s/^GNU Emacs /v/ p'`
+cd `dirname $0`
+if [ "x$1" = 'x-f' ]; then
+    rm -rf $D/el-get
+elif [ "x$1" != 'x-i' ]; then
+    rm -f $D/el-get/.*el
+    rm -f $D/el-get/.*elc
+fi
+rm  -f init-loader/*.elc
+rm -rf $D/el-get/bundle-init
+
