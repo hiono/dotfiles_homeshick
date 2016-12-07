@@ -131,3 +131,6 @@
   (local-set-key (kbd "C-c h") 'hs-hide-block)
   (local-set-key (kbd "C-c s") 'hs-show-block)
   (local-set-key (kbd "C-c l") 'hs-hide-level))
+
+;; set mode-line-inactive face
+(set-face-attribute 'mode-line-inactive nil :background "color-242" :foreground "gray10")
