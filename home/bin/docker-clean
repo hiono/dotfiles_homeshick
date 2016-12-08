@@ -1,0 +1,6 @@
+#!/bin/bash
+BUF=$(docker ps -q -f status=exited)
+[ -n "$BUF" ] && docker rm $BUF
+BUF=$(docker images -q -f dangling=true)
+[ -n "$BUF" ] && docker rmi $BUF
+
