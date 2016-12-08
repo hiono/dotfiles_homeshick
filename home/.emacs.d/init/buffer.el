@@ -18,7 +18,7 @@
 (add-hook 'find-file-not-found-functions
           #'(lambda ()
               (let ((dir (file-name-directory (buffer-file-name))))
-a                (make-directory dir t)
+                (make-directory dir t)
                 nil)))
 
 ;; use directory name instead of <num>

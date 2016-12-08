@@ -9,24 +9,6 @@
 (defun remove-local-hook (hook function)
   (remove-hook hook function t))
 
-;; git-gutter
-(bundle! git-gutter-fringe
-  (global-git-gutter-mode t))
-
-;; git-messenger
-(bundle noflet)
-(bundle git-messenger
-  (setq-default git-messenger:show-detail t)
-
-  (defun git-messenger:replace-popup-tip (orig-fun &rest args)
-    (eval-and-compile (require 'noflet))
-    (let ((popup-tip (symbol-function 'popup-tip)))
-      (noflet ((popup-tip (&rest args)
-                 (apply popup-tip (append args '(:margin 1 :nostrip t)))))
-        (apply orig-fun args))))
-  (advice-add 'git-messenger:popup-message
-              :around #'git-messenger:replace-popup-tip))
-
 ;; eldoc
 (setq-default eldoc-idle-delay 0.1
               eldoc-echo-area-use-multiline-p t

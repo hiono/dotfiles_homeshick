@@ -52,4 +52,3 @@
 (if (equal (getenv "TERM")  "cygwin")
     (set-terminal-coding-system 'sjis)
   (set-terminal-coding-system 'utf-8-unix))
-

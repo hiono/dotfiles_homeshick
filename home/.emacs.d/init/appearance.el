@@ -55,7 +55,7 @@
 (defun lighten-comment ()
   (interactive)
   (set-comment-color "OrangeRed"))
-(darken-comment)
+(lighten-comment)
 
 ;; highlight specific keywords in comments
 (bundle fic-mode

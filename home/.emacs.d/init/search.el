@@ -9,4 +9,3 @@
     (interactive "r")
     (unless dir (setq dir (moccur-grep-read-directory)))
     (moccur-grep-find dir (list (buffer-substring-no-properties beg end)))))
-

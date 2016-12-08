@@ -16,5 +16,5 @@
         "%n"
         ")%]-"
         (which-func-mode ("" which-func-format "-"))
-;;         global-mode-string
+        ;; global-mode-string
         "-%-"))
