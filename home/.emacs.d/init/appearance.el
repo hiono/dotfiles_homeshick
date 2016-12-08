@@ -5,8 +5,9 @@
 (defconst user-default-fg "#aaaaaa")
 (defconst user-default-bg "#1f1f1f")
 (defconst user-face-alist
-  `((default   :foreground ,user-default-fg
-               :background ,user-default-bg)
+  `((default
+      :foreground ,user-default-fg
+      :background ,user-default-bg)
     (region                          :background "#8c8ce8")
     (mode-line :foreground "#8fb28f" :background "#3f3f3f" :box nil)
     (mode-line-inactive              :background "#5f5f5f" :box nil)
@@ -29,6 +30,8 @@
   (el-get-lock-unlock 'zenburn-theme)
   (bundle zenburn-theme
     :url "http://raw.github.com/bbatsov/zenburn-emacs/master/zenburn-theme.el"
+    (add-to-list 'custom-theme-load-path
+                 (expand-file-name "zenburn-theme" el-get-dir))
     (load-theme 'zenburn t)
     ;; apply user defined faces
     (let* ((class '((class color) (min-colors 89)))
@@ -133,4 +136,4 @@
   (local-set-key (kbd "C-c l") 'hs-hide-level))
 
 ;; set mode-line-inactive face
-(set-face-attribute 'mode-line-inactive nil :background "color-242" :foreground "gray10")
+(set-face-attribute 'mode-line-inactive nil :background "gray10" :foreground "snow4")
