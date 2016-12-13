@@ -4,9 +4,14 @@
   "Host part of function `system-name'.")
 
 ;; shell
-(setq-default explicit-shell-file-name "fish")
-(setq shell-file-name "fish"
-      shell-command-switch "-c")
+(if (executable-find "fish")
+    (progn
+      (setq-default explicit-shell-file-name "fish")
+      (setq shell-file-name "fish"
+            shell-command-switch "-c"))
+  (setq-default explicit-shell-file-name "bash")
+  (setq shell-file-name "bash"
+        shell-command-switch "-c"))
 
 ;; interactive
 (fset 'yes-or-no-p 'y-or-n-p)

@@ -1,1 +1,1 @@
-(bundle fish-mode)
+(el-get-bundle fish-mode)

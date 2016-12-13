@@ -34,6 +34,6 @@
               #'(lambda (orig-fun ask keep-variants)
                   (funcall orig-fun nil keep-variants))))
 
-(bundle ediff-side-by-side
+(el-get-bundle ediff-side-by-side
   (with-eval-after-load-feature 'ediff
     (require 'ediff-side-by-side)))

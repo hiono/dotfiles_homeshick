@@ -14,23 +14,21 @@
                 package-user-dir (expand-file-name "elpa" versioned-dir)))
 
 ;; bundle (an El-Get wrapper)
-(setq-default el-get-emacswiki-base-url
-              "http://raw.github.com/emacsmirror/emacswiki.org/master/")
-(add-to-list 'load-path (expand-file-name "bundle" el-get-dir))
-(unless (require 'bundle nil 'noerror)
+(add-to-list 'load-path (expand-file-name "el-get" el-get-dir))
+(unless (require 'el-get nil 'noerror)
   (with-current-buffer
       (url-retrieve-synchronously
-       "http://raw.github.com/tarao/bundle-el/master/bundle-install.el")
+       "https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el")
     (goto-char (point-max))
     (eval-print-last-sexp)))
 (add-to-list 'el-get-recipe-path (locate-user-emacs-file "recipes"))
 
 ;; lock the pacakge versions
-(bundle tarao/el-get-lock
+(el-get-bundle tarao/el-get-lock
   (el-get-lock)
   (el-get-lock-unlock 'el-get))
 
-(bundle with-eval-after-load-feature)
+(el-get-bundle with-eval-after-load-feature)
 
 ;; put site-lisp and its subdirectories into load-path
 (when (fboundp 'normal-top-level-add-subdirs-to-load-path)
@@ -41,12 +39,34 @@
       (normal-top-level-add-subdirs-to-load-path))))
 
 ;; load init files
-(bundle! emacs-jp/init-loader)
+(el-get-bundle! emacs-jp/init-loader)
 ;; load
 (setq-default init-loader-show-log-after-init nil
               init-loader-byte-compile t)
 (init-loader-load (locate-user-emacs-file "init-loader"))
 
+(el-get 'sync)
+
 ;; hide compilation results
 (let ((win (get-buffer-window "*Compile-Log*")))
   (when win (delete-window win)))
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(blink-matching-paren t)
+ '(column-number-mode t)
+ '(indicate-buffer-boundaries (quote right))
+ '(inhibit-startup-screen t)
+ '(initial-scratch-message nil)
+ '(menu-bar-mode nil)
+ '(package-selected-packages (quote (fish-mode)))
+ '(tool-bar-mode nil))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

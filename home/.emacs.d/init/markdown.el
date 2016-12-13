@@ -1,4 +1,4 @@
-(bundle markdown-mode
+(el-get-bundle markdown-mode
   (add-hook 'markdown-mode-hook
             #'(lambda ()
                 (set (make-local-variable 'whitespace-style)

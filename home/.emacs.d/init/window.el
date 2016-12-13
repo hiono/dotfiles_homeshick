@@ -1,5 +1,5 @@
 ;; window selection with numbers
-(bundle switch-window)
+(el-get-bundle switch-window)
 
 ;; window selection by directional keys
 (setq-default windmove-wrap-around t)

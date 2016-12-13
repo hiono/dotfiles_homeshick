@@ -1,4 +1,4 @@
-(bundle term+)
+(el-get-bundle term+)
 (with-eval-after-load-feature (term term+)
   (require 'xterm-256color)
   (let ((vec [unspecified
@@ -12,11 +12,11 @@
             (set-face-foreground face (elt vec (1+ i)))
             (set-face-background face (elt vec (1+ i)))))
       (setq ansi-term-color-vector vec)))
-  (bundle! term+key-intercept)
-  (bundle! term+mode)
-  (with-eval-after-load-feature 'evil (bundle! term+evil)))
+  (el-get-bundle! term+key-intercept)
+  (el-get-bundle! term+mode)
+  (with-eval-after-load-feature 'evil (el-get-bundle! term+evil)))
 
-(bundle term+mux
+(el-get-bundle term+mux
   (with-eval-after-load-feature 'term+mux
     (define-key term+char-map (kbd "C-z") term+mux-map)
     (setq term+mux-session-host-color-alist

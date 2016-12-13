@@ -24,7 +24,7 @@
              '("\\.xhtml$" . ["insert.xhtml" template-replacer]))
 
 ;; zencoding
-(bundle zencoding-mode
+(el-get-bundle zencoding-mode
   (setq-default zencoding-preview-default nil ; no preview
                 zencoding-insert-flash-time 0.2)
   (add-hook 'nxml-mode-hook #'zencoding-mode)
@@ -36,7 +36,7 @@
       #'zencoding-preview-accept)))
 
 ;; YAML
-(bundle yaml-mode)
+(el-get-bundle yaml-mode)
 (setq auto-mode-alist
       (append '(("\\.yml$" . yaml-mode)
                 ("\\.yaml$" . yaml-mode)) auto-mode-alist))

@@ -1,5 +1,5 @@
 ;; auto completion like IntelliSense
-(bundle! auto-complete
+(el-get-bundle! auto-complete
   (global-auto-complete-mode t)
   (setq ac-auto-show-menu 0.5)
   (let ((map ac-complete-mode-map))
@@ -8,7 +8,7 @@
     (define-key map (kbd "TAB") nil)))
 
 ;; company
-(bundle company-mode
+(el-get-bundle company-mode
   ;; permanently replace `company-complete-common' with
   ;; `company-complete-common-or-cycle'.
   (with-eval-after-load 'company

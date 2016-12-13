@@ -17,9 +17,9 @@
                 lisp-interaction-mode-hook
                 ielm-mode-hook))
   (add-hook hook #'eldoc-mode))
-(bundle c-eldoc
+(el-get-bundle c-eldoc
   (dolist (hook '(c-mode-hook c++-mode-hook))
     (add-hook hook #'(lambda ()
                        (set (make-local-variable 'eldoc-idle-delay) 0.3)
                        (c-turn-on-eldoc-mode)))))
-(bundle eldoc-extension)
+(el-get-bundle eldoc-extension)

@@ -1,4 +1,4 @@
-(bundle ag
+(el-get-bundle ag
   :depends (wgrep)
   (with-eval-after-load-feature 'ag
     (setq ag-highlight-search t)  ; 検索キーワードをハイライト

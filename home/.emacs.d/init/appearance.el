@@ -20,7 +20,7 @@
 ;; theme
 (setq frame-background-mode 'dark)
 (if (not (and (>= emacs-major-version 24) (>= emacs-minor-version 1)))
-    (bundle color-theme
+    (el-get-bundle color-theme
       (color-theme-initialize)
       (color-theme-dark-laptop)
       ;; apply user defined faces
@@ -28,7 +28,7 @@
         (let ((name (car elt)) (attrs (cdr elt)))
           (apply #'set-face-attribute `(,name nil ,@attrs)))))
   (el-get-lock-unlock 'zenburn-theme)
-  (bundle zenburn-theme
+  (el-get-bundle zenburn-theme
     :url "http://raw.github.com/bbatsov/zenburn-emacs/master/zenburn-theme.el"
     (add-to-list 'custom-theme-load-path
                  (expand-file-name "zenburn-theme" el-get-dir))
@@ -58,7 +58,7 @@
 (lighten-comment)
 
 ;; highlight specific keywords in comments
-(bundle fic-mode
+(el-get-bundle fic-mode
   (add-hook 'prog-mode-hook #'fic-mode) ;; Emacs 24
   (add-hook 'cperl-mode-hook #'fic-mode)
   (with-eval-after-load-feature 'fic-mode
@@ -68,7 +68,7 @@
       (set-face-background face "gray40"))))
 
 ;; scroll bar
-(bundle yascroll
+(el-get-bundle yascroll
   (global-yascroll-bar-mode))
 
 ;; line-wrap character

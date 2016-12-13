@@ -17,7 +17,7 @@
           #'executable-make-buffer-file-executable-if-script-p)
 
 ;; undo/redo
-(bundle undo-tree
+(el-get-bundle undo-tree
   (setq-default undo-tree-mode-lighter nil)
   (global-undo-tree-mode))
 
