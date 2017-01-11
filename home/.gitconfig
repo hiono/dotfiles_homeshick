@@ -16,3 +16,5 @@
 	followTags = true
 [color]
 	ui = auto
+[http]
+	sslverify = false
