@@ -1,7 +1,4 @@
 #!/bin/bash
-BUF=$(docker ps -q -f status=exited -f status=created -f status=dead -f status=paused)
-[ -n "$BUF" ] && docker rm $BUF
-BUF=$(docker images -q -f dangling=true)
-[ -n "$BUF" ] && docker rmi $BUF
-BUF=$(docker volume ls -qf dangling=true)
-[ -n "$BUF" ] && docker volume rm $BUF
+docker ps -q -f status=exited -f status=created -f status=dead -f status=paused | xargs --no-run-if-empty docker rm
+docker images -q -f dangling=true | xargs --no-run-if-empty docker rmi
+docker volume ls -qf dangling=true | xargs --no-run-if-empty docker volume rm
