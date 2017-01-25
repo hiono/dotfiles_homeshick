@@ -120,56 +120,86 @@ place the new frame at the right side of the current frame."
   (fit-largest-display 'right))
 
 ;; font settings
-(defconst default-fontset-name "menloja")
-(defconst default-base-font-name "Menlo")
-(defconst default-base-font-size 10)
-(defconst default-ja-font-name "Hiragino Kaku Gothic ProN")
-(defconst default-ja-font-pat "Hiragino.*")
-(defconst default-ja-font-scale 1.3)
+;; (defconst default-fontset-name "menloja")
+;; (defconst default-base-font-name "Menlo")
+;; (defconst default-base-font-size 10)
+;; (defconst default-ja-font-name "Hiragino Kaku Gothic ProN")
+;; (defconst default-ja-font-pat "Hiragino.*")
+;; (defconst default-ja-font-scale 1.3)
 
-(defun setup-window-system-configuration (&optional frame)
-  "Initialize configurations for window system.
-Configurations, which require X (there exists a frame), are
-placed in this function.
+(defun setting-font (font-name)
+  (let* ((fontset-name font-name)
+         (size 13)
+         (ascii-font font-name)
+         (multibyte-font font-name)
+         (h (* size 10))
+         (font (format "%s-%d:weight=normal:slant=normal" ascii-font size))
+         (ascii-fontspec (font-spec :family ascii-font))
+         (multibyte-fontspec (font-spec :family multibyte-font))
+         (fontset (create-fontset-from-ascii-font font nil fontset-name)))
+    (set-face-attribute 'default nil :family ascii-font)
+    (set-fontset-font fontset 'japanese-jisx0213.2004-1 multibyte-fontspec)
+    (set-fontset-font fontset 'japanese-jisx0213-2 multibyte-fontspec)
+    (set-fontset-font fontset 'katakana-jisx0201 multibyte-fontspec) ; 半角カナ
+    (set-fontset-font fontset '(#x0080 . #x024F) ascii-fontspec)     ; 分音符付きラテン
+    (set-fontset-font fontset '(#x0370 . #x03FF) ascii-fontspec)     ; ギリシャ文字
+    ))
+(let ((font-name)
+      (after-font-name-list '("Ricty" "TakaoGothic" "IPAGothic" "MS Gothic")))
+  (while (not (null after-font-name-list))
+    ;; x:xs を設定します。
+    (setq font-name (car after-font-name-list)
+          after-font-name-list (cdr after-font-name-list))
+    ;; font-name が存在するかどうか調べます。
+    (if (find-font (font-spec :family font-name))
+        (progn
+          (setting-font font-name)
+          ;; 存在したら、after-font-name-list に nil を設定して終了するようにします。
+          (setq after-font-name-list nil)))))
 
-When Emacs is started as a GUI application, just running this
-function initializes the configurations.
+;; (defun setup-window-system-configuration (&optional frame)
+;;   "Initialize configurations for window system.
+;; Configurations, which require X (there exists a frame), are
+;; placed in this function.
 
-When Emacs is started as a daemon, this function should be called
-just after the first frame is created by a client.  For this,
-this function is added to `after-make-frame-functions' and
-removed from them after the first call."
-  (with-selected-frame (or frame (selected-frame))
-    (when window-system
-      (let* ((fontset-name default-fontset-name)
-             (base default-base-font-name) (size default-base-font-size)
-             (ja default-ja-font-name) (ja-pat default-ja-font-pat)
-             (scale default-ja-font-scale)
-             (base-font (format "%s-%d:weight=normal:slant=normal" base size))
-             (ja-font (font-spec :family ja))
-             (fsn (concat "fontset-" fontset-name))
-             (elt (list (cons 'font fsn))))
-        ;; create font
-        (create-fontset-from-ascii-font base-font nil fontset-name)
-        (set-fontset-font fsn 'unicode ja-font nil 'append)
-        (add-to-list 'face-font-rescale-alist (cons ja-pat scale))
-        ;; default
-        (set-frame-font fsn)
-        (setq-default initial-frame-alist (append elt initial-frame-alist)
-                      default-frame-alist (append elt default-frame-alist))
-        ;; current frame
-        (set-frame-parameter (selected-frame) 'font fsn)
-        ;; call once
-        (remove-hook 'after-init-hook #'setup-window-system-configuration)
-        (remove-hook 'after-make-frame-functions
-                     #'setup-window-system-configuration)))))
+;; When Emacs is started as a GUI application, just running this
+;; function initializes the configurations.
 
-(when window-system
-  (if after-init-time
-      ;; already initialized
-      (setup-window-system-configuration)
-    (add-hook 'after-init-hook #'setup-window-system-configuration)))
-(add-hook 'after-make-frame-functions #'setup-window-system-configuration)
+;; When Emacs is started as a daemon, this function should be called
+;; just after the first frame is created by a client.  For this,
+;; this function is added to `after-make-frame-functions' and
+;; removed from them after the first call."
+;;   (with-selected-frame (or frame (selected-frame))
+;;     (when window-system
+;;       (let* ((fontset-name default-fontset-name)
+;;              (base default-base-font-name) (size default-base-font-size)
+;;              (ja default-ja-font-name) (ja-pat default-ja-font-pat)
+;;              (scale default-ja-font-scale)
+;;              (base-font (format "%s-%d:weight=normal:slant=normal" base size))
+;;              (ja-font (font-spec :family ja))
+;;              (fsn (concat "fontset-" fontset-name))
+;;              (elt (list (cons 'font fsn))))
+;;         ;; create font
+;;         (create-fontset-from-ascii-font base-font nil fontset-name)
+;;         (set-fontset-font fsn 'unicode ja-font nil 'append)
+;;         (add-to-list 'face-font-rescale-alist (cons ja-pat scale))
+;;         ;; default
+;;         (set-frame-font fsn)
+;;         (setq-default initial-frame-alist (append elt initial-frame-alist)
+;;                       default-frame-alist (append elt default-frame-alist))
+;;         ;; current frame
+;;         (set-frame-parameter (selected-frame) 'font fsn)
+;;         ;; call once
+;;         (remove-hook 'after-init-hook #'setup-window-system-configuration)
+;;         (remove-hook 'after-make-frame-functions
+;;                      #'setup-window-system-configuration)))))
+
+;; (when window-system
+;;   (if after-init-time
+;;       ;; already initialized
+;;       (setup-window-system-configuration)
+;;     (add-hook 'after-init-hook #'setup-window-system-configuration)))
+;; (add-hook 'after-make-frame-functions #'setup-window-system-configuration)
 
 (defun close-frame-display (frame)
   "Close FRAME's X connection."

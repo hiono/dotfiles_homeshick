@@ -51,6 +51,16 @@
 (let ((win (get-buffer-window "*Compile-Log*")))
   (when win (delete-window win)))
 
+;; (setq mail-user-agent 'message-user-agent)
+;; ;; Set my default sending details:
+;; (setq user-mail-address "hiroyuki.ono.jc@renesas.com"
+;;       user-full-name "Hiroyuki Ono")
+;; ;; Configured the SMTP server info for Outlook
+;; (setq smtpmail-stream-type 'ssl
+;;       smtpmail-smtp-server "smtp.office365.com"
+;;       smtpmail-smtp-service 587)
+;; (setq message-send-mail-function 'message-smtpmail-send-it)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -63,6 +73,7 @@
  '(initial-scratch-message nil)
  '(menu-bar-mode nil)
  '(package-selected-packages (quote (fish-mode)))
+ '(send-mail-function (quote mailclient-send-it))
  '(tool-bar-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -70,3 +81,5 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+(put 'narrow-to-region 'disabled nil)
+(put 'dired-find-alternate-file 'disabled nil)
