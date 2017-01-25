@@ -51,15 +51,15 @@
 (let ((win (get-buffer-window "*Compile-Log*")))
   (when win (delete-window win)))
 
-(setq mail-user-agent 'message-user-agent)
-;; Set my default sending details:
-(setq user-mail-address "hiroyuki.ono.jc@renesas.com"
-      user-full-name "Hiroyuki Ono")
-;; Configured the SMTP server info for Outlook
-(setq smtpmail-stream-type 'ssl
-      smtpmail-smtp-server "smtp.office365.com"
-      smtpmail-smtp-service 587)
-(setq message-send-mail-function 'message-smtpmail-send-it)
+;; (setq mail-user-agent 'message-user-agent)
+;; ;; Set my default sending details:
+;; (setq user-mail-address "hiroyuki.ono.jc@renesas.com"
+;;       user-full-name "Hiroyuki Ono")
+;; ;; Configured the SMTP server info for Outlook
+;; (setq smtpmail-stream-type 'ssl
+;;       smtpmail-smtp-server "smtp.office365.com"
+;;       smtpmail-smtp-service 587)
+;; (setq message-send-mail-function 'message-smtpmail-send-it)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
