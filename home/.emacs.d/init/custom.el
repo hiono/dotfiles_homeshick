@@ -6,7 +6,7 @@
  '(column-number-mode t)
  '(indicate-buffer-boundaries (quote right))
  '(tool-bar-mode nil)
- '(menu-bar-mode nil)
+ '(menu-bar-mode t)
  '(blink-matching-paren t)
  '(inhibit-startup-message t)
  '(inhibit-startup-screen t)
