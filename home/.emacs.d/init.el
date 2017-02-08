@@ -71,6 +71,7 @@
  '(indicate-buffer-boundaries (quote right))
  '(inhibit-startup-screen t)
  '(initial-scratch-message nil)
+ '(linum-format "%5d ")
  '(menu-bar-mode nil)
  '(package-selected-packages (quote (fish-mode)))
  '(send-mail-function (quote mailclient-send-it))
