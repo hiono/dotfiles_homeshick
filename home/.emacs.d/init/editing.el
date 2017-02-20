@@ -31,3 +31,6 @@
       (forward-char)
       (when (= (point) pt) (call-interactively 'move-beginning-of-line))
       (kill-region (point) pt))))
+
+;; text-adjust
+(require 'text-adjust nil t)
