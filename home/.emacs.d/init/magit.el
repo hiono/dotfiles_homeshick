@@ -4,6 +4,7 @@
                   (display-buffer buffer '(display-buffer-same-window)))
               magit-auto-revert-mode nil)
 (el-get-bundle (magit magit-gitflow)
+  :features (magit magit-gitflow)
   (with-eval-after-load-feature 'magit-diff
     (let ((map magit-diff-mode-map))
       (define-key map (kbd "RET") 'magit-ediff-dwim)
