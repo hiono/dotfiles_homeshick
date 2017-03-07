@@ -31,4 +31,4 @@
         (el-get-lock :checksum "df8cfe55441695865a64b97946750b6413a40425")))
 (setq el-get-lock-locked-packages 'nil)
 (setq el-get-lock-unlocked-packages
-      '(el-get))
+      '(madhat2r-theme zenburn-theme el-get))

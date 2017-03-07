@@ -14,6 +14,19 @@
     (header-line                     :background "#3f3f3f" :box nil))
   "User defined face attributes to override default faces or theme faces.")
 
+;; madhat2r-theme
+(setq frame-background-mode 'dark)
+(el-get-lock-unlock 'madhat2r-theme)
+(el-get-bundle madhat2r-theme
+  (add-to-list 'custom-theme-load-path
+               (expand-file-name "madhat2r-theme" el-get-dir))
+  (load-theme 'madhat2r t)
+  ;; apply user defined faces
+  (let* ((class '((class color) (min-colors 89)))
+         (to-spec #'(lambda (elt) `(,(car elt) ((,class ,(cdr elt))))))
+         (faces (mapcar to-spec user-face-alist)))
+    (apply #'custom-theme-set-faces `(user ,@faces))))
+
 ;; ;; theme
 ;; (setq frame-background-mode 'dark)
 ;; (defvar zenburn-override-colors-alist

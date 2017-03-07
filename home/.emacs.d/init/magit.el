@@ -24,4 +24,5 @@
     (define-key map "v" 'magit-diff-visit-file)
     (define-key map (kbd "M-.") 'magit-diff-visit-file)
     (define-key map (kbd "SPC") 'magit-jump-to-diffstat-or-diff))
+  (set-face-foreground 'magit-hash "red")
   )
