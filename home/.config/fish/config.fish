@@ -14,5 +14,6 @@ if status --is-login
     #         rdm --daemon
     #     end
     # end
+    set -gx PATH $PATH ~/bin
 end
 set -x COMPOSE_HTTP_TIMEOUT 300
