@@ -18,3 +18,5 @@
 	ui = auto
 [http]
 	sslverify = false
+[diff]
+	compactionHeuristic = true

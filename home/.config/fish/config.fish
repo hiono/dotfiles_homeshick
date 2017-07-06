@@ -3,15 +3,16 @@ if status --is-interactive
   eval (keychain --eval --quiet -Q id_rsa | sed -e 's/\(.*\)=\(.*\); export .*$/set -x \1 \2/g')
 end
 if status --is-login
-    # for rtags
-    which rdm > /dev/null
-    if test $status -eq 0
-        pgrep rdm > /dev/null
-        if test $status -ne 0
-            rmd --daemon
-        end
-    end
     # add PATH
     set -x PATH $PATH ~/bin
+    # set -x PATH $PATH ~/bin ~/.emacs.d/**/el-get/rtags/bin
+    # # for rtags
+    # which rdm > /dev/null
+    # if test $status -eq 0
+    #     pgrep rdm > /dev/null
+    #     if test $status -ne 0
+    #         rdm --daemon
+    #     end
+    # end
 end
 set -x COMPOSE_HTTP_TIMEOUT 300

@@ -73,7 +73,7 @@
  '(initial-scratch-message nil)
  '(linum-format "%5d ")
  '(menu-bar-mode nil)
- '(package-selected-packages (quote (fish-mode)))
+ '(package-selected-packages (quote (cmake-mode fish-mode)))
  '(send-mail-function (quote mailclient-send-it))
  '(tool-bar-mode nil))
 (custom-set-faces
@@ -81,6 +81,11 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(default ((((class color) (min-colors 89)) (:foreground "#aaaaaa" :background "#1f1f1f"))))
+ '(header-line ((((class color) (min-colors 89)) (:background "#3f3f3f" :box nil))))
+ '(mode-line ((((class color) (min-colors 89)) (:foreground "#8fb28f" :background "#3f3f3f" :box nil))))
+ '(mode-line-inactive ((((class color) (min-colors 89)) (:background "#5f5f5f" :box nil))))
+ '(region ((((class color) (min-colors 89)) (:background "#8c8ce8")))))
 (put 'narrow-to-region 'disabled nil)
 (put 'dired-find-alternate-file 'disabled nil)
+(put 'upcase-region 'disabled nil)
