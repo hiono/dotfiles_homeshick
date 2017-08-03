@@ -33,12 +33,22 @@
       )
 
 ;; 着信
-(setq wl-biff-check-folder-list '("%inbox") ; モードラインに着信通知をする
-      wl-biff-check-folder-list t ; 初期設定は nil。 メールの着信をチェックするフォルダのリスト。 nil の場合は着信のチェックを行ないません。
-      wl-biff-check-interval    300 ; 初期設定は 40 (単位:秒)。 この値ごとにメール着信のチェックを行ないます。
+(setq wl-biff-check-folder-list '(
+                                  "%INBOX"
+                                  "%INBOX/1.Redmine"
+                                  "%INBOX/2.情報"
+                                  "%INBOX/3.MISC"
+                                  "%INBOX/4.通達"
+                                  "%INBOX/5.週報"
+                                  "%INBOX/6.組合"
+                                  "%INBOX/7.EDA"
+                                  "%INBOX/8.リスクマネジメント"
+                                  ) ; モードラインに着信通知をする
+      wl-biff-use-idle-timer t ; 初期設定は nil。 メールの着信をチェックするフォルダのリスト。 nil の場合は着信のチェックを行ないません。
+      wl-biff-check-interval    60 ; 初期設定は 40 (単位:秒)。 この値ごとにメール着信のチェックを行ないます。
+      wl-strict-diff-folders wl-biff-check-folder-list ; Use strict diff so wl-biff works with Gmail and others
       )
 
-;; KUMOI
 ;; SMTP
 (setq wl-smtp-posting-user "hiroyuki.ono.jc@renesas.com"
       wl-smtp-posting-server "smtp.office365.com"
@@ -62,9 +72,6 @@
 ;; (require 'tls)
 ;; (setq elmo-network-stream-type-alist
 ;;       '(("!"      ssl       ssl      open-tls-stream)
-;;         ;;'(("!"      ssl       ssl      open-ssl-stream)
-;;         ;;  ("!"      ssl       starttls starttls-open-ssl-stream)
 ;;         ("!!"     starttls  starttls starttls-open-stream)
 ;;         ("!socks" socks     socks    socks-open-network-stream)))
-;; ;;(setq tls-program '("gnutls-cli --insecure -p %p %h"))
 ;; (setq tls-program '("gnutls-cli -p %p %h"))
