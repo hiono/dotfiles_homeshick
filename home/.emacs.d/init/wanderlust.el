@@ -75,3 +75,7 @@
 ;;         ("!!"     starttls  starttls starttls-open-stream)
 ;;         ("!socks" socks     socks    socks-open-network-stream)))
 ;; (setq tls-program '("gnutls-cli -p %p %h"))
+
+;; Display
+;; text/htmlよりもtext/plainを優先表示する
+(set-alist 'mime-view-type-subtype-score-alist '(text . html) 0)
