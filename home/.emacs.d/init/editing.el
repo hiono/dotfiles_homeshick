@@ -34,3 +34,11 @@
 
 ;; text-adjust
 (require 'text-adjust nil t)
+(setq adaptive-fill-regexp "[ \t]*")
+(setq adaptive-fill-mode t)
+(defun text-adjust-space-before-save-if-needed ()
+  (when (memq major-mode
+              '(org-mode text-mode wl-draft-mode))
+    (text-adjust-space-buffer)))
+(defalias 'spacer 'text-adjust-space-buffer)
+(add-hook 'before-save-hook 'text-adjust-space-before-save-if-needed)
