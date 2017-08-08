@@ -34,15 +34,15 @@
 
 ;; 着信
 (setq wl-biff-check-folder-list '(
-                                  "%INBOX"
-                                  "%INBOX/1.Redmine"
-                                  "%INBOX/2.情報"
-                                  "%INBOX/3.MISC"
-                                  "%INBOX/4.通達"
-                                  "%INBOX/5.週報"
-                                  "%INBOX/6.組合"
-                                  "%INBOX/7.EDA"
-                                  "%INBOX/8.リスクマネジメント"
+                                  ".INBOX"
+                                  ".1 Redmine"
+                                  ".2 情報"
+                                  ".3 MISC"
+                                  ".4 通達"
+                                  ".5 週報"
+                                  ".6 組合"
+                                  ".7 EDA"
+                                  ".8 リスクマネジメント"
                                   ) ; モードラインに着信通知をする
       wl-biff-use-idle-timer t ; 初期設定は nil。 メールの着信をチェックするフォルダのリスト。 nil の場合は着信のチェックを行ないません。
       wl-biff-check-interval    60 ; 初期設定は 40 (単位:秒)。 この値ごとにメール着信のチェックを行ないます。
@@ -50,19 +50,19 @@
       )
 
 ;; SMTP
-(setq wl-smtp-posting-user "hiroyuki.ono.jc@renesas.com"
+(setq wl-smtp-posting-user "a0201089@adwin.renesas.com"
       wl-smtp-posting-server "smtp.office365.com"
       wl-smtp-connection-type 'starttls
       wl-smtp-authenticate-type "login"
       wl-smtp-posting-port 587
       wl-local-domain "renesas.com")
 
-;; IMAP
-(setq elmo-imap4-default-user "hiroyuki.ono.jc@renesas.com"
-      elmo-imap4-default-server "outlook.office365.com"
-      elmo-imap4-default-stream-type 'ssl
-      elmo-imap4-default-authenticate-type 'clear
-      elmo-imap4-default-port '993)
+;; ;; IMAP
+;; (setq elmo-imap4-default-user "a0201089@adwin.renesas.com"
+;;       elmo-imap4-default-server "outlook.office365.com"
+;;       elmo-imap4-default-stream-type 'ssl
+;;       elmo-imap4-default-authenticate-type 'clear
+;;       elmo-imap4-default-port '993)
 
 ;; SSL
 (require 'tls)
@@ -79,3 +79,6 @@
 ;; Display
 ;; text/htmlよりもtext/plainを優先表示する
 (set-alist 'mime-view-type-subtype-score-alist '(text . html) 0)
+
+;; 初期設定では default-truncate-lines の値を使います。 Non-nil ならメッセージバッファで長い行の折り返しをしません
+(setq wl-message-truncate-lines 72)

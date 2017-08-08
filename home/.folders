@@ -10,15 +10,26 @@
 ## IMAP ユーザのメールボックス
 # %inbox
 
-%INBOX              "0.受信トレイ"
-%INBOX/1.Redmine    "1.Redmine"
-%INBOX/2.情報       "2.情報"
-%INBOX/3.MISC       "3.MISC"
-%INBOX/4.通達       "4.通達"
-%INBOX/5.週報       "5.週報"
-%INBOX/6.組合       "6.組合"
-%INBOX/7.EDA        "7.EDA"
-%INBOX/8.リスクマネジメント "8.リスクマネジメント"
+# %INBOX              "0.受信トレイ"
+# %INBOX/1.Redmine    "1.Redmine"
+# %INBOX/2.情報       "2.情報"
+# %INBOX/3.MISC       "3.MISC"
+# %INBOX/4.通達       "4.通達"
+# %INBOX/5.週報       "5.週報"
+# %INBOX/6.組合       "6.組合"
+# %INBOX/7.EDA        "7.EDA"
+# %INBOX/8.リスクマネジメント "8.リスクマネジメント"
+
+## Maildir
+.Outlook/INBOX        "0 受信トレイ"
+.Outlook/1 Redmine    "1 Redmine"
+.Outlook/2 &YMVYMQ-   "2 情報"
+.Outlook/3 MISC       "3 MISC"
+.Outlook/4 &kBqQVA-   "4 通達"
+.Outlook/5 &kDFYMQ-   "5 週報"
+.Outlook/6 &fURUCA-   "6 組合"
+.Outlook/7 EDA        "7 EDA"
+.Outlook/8 &MOowuTCvMN4wzTC4MOEw8zDI- "8 リスクマネジメント"
 
 ## POP ユーザのメールボックス
 # &USERNAME@POPSERVER.EXAMPLE.COM
