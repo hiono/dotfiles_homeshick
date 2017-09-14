@@ -1,0 +1,91 @@
+#
+#  ~/.folders フォルダ定義ファイルサンプル
+#
+# 個々のフォルダの書式については Info の Folders セクションを参照のこと。
+#
+# '#' で始まる行はコメント。
+# 空行は無視される。
+#
+
+## IMAP ユーザのメールボックス
+# %inbox
+
+# %INBOX              "0.受信トレイ"
+# %INBOX/1.Redmine    "1.Redmine"
+# %INBOX/2.情報       "2.情報"
+# %INBOX/3.MISC       "3.MISC"
+# %INBOX/4.通達       "4.通達"
+# %INBOX/5.週報       "5.週報"
+# %INBOX/6.組合       "6.組合"
+# %INBOX/7.EDA        "7.EDA"
+# %INBOX/8.リスクマネジメント "8.リスクマネジメント"
+
+## Maildir
+.Outlook/INBOX        "0 受信トレイ"
+.Outlook/1 Redmine    "1 Redmine"
+.Outlook/2 &YMVYMQ-   "2 情報"
+.Outlook/3 MISC       "3 MISC"
+.Outlook/4 &kBqQVA-   "4 通達"
+.Outlook/5 &kDFYMQ-   "5 週報"
+.Outlook/6 &fURUCA-   "6 組合"
+.Outlook/7 EDA        "7 EDA"
+.Outlook/8 &MOowuTCvMN4wzTC4MOEw8zDI- "8 リスクマネジメント"
+
+## POP ユーザのメールボックス
+# &USERNAME@POPSERVER.EXAMPLE.COM
+
+## [ POP ユーザにはパイプフォルダが役に立ちます ]
+## [ パイプフォルダを使えば、メールを取り込むことが可能です ]
+# |&USERNAME@POPSERVER.EXAMPLE.COM|+inbox
+
+## ゴミ箱・草稿・送信箱
++trash
++draft
++queue
+
+## 重要マーク `$' のついたメッセージをまとめる
+'flag/important
+
+## MH フォルダ
+# +inbox
+
+## IMAP フォルダ
+# %inbox.emacs.wl
+# %inbox.emacs.apel-ja
+
+## IMAP サーバ越しに MH folder にアクセス
+# %#mh/inbox
+
+## NNTP フォルダ
+# -fj.os.bsd.freebsd
+# -fj.mail.reader.mew
+# -fj.news.reader.gnus
+
+## [ 他の NNTP サーバ上のニューズグループ ]
+# -jlug.ml.users@NEWS.EXAMPLE.NET
+# -emacs.auc-tex@NEWS.EXAMPLE.ORG
+# -ring.openlab.skk@NEWS.EXAMPLE.COM
+
+
+## グループの定義
+## [ フォルダを波括弧でくくってグループにする ]
+# Emacsen{
+#	+to/wl
+#	+to/mew-dist
+#	+to/apel-ja
+## [ グループの入れ子も可能 ]
+#	XEmacs{
+#		+to/xemacs-beta
+#		+to/xemacs-beta-ja
+#		+to/xemacs-mule
+#	}
+# }
+
+## アクセスグループ
+## [ 行末に '/' がつくと、そのフォルダに含まれるサブフォルダ全てが ]
+## [ ひとつのグループとなる。]
+## [ `C-u RET' でアクセスグループを開くと更新できる。 ]
+# + /
+
+## IMAP フォルダのアクセスグループの例
+# % /

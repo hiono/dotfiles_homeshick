@@ -1,1 +1,1 @@
-../../../../../../.emacs.d/init/rtags.el
+../init/rtags.el

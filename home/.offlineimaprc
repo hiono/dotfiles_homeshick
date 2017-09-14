@@ -1,0 +1,25 @@
+[general]
+accounts = Outlook
+maxsyncaccounts = 4
+socktimeout = 60
+pythonfile = ~/.offlineimap.py
+
+[Account Outlook]
+localrepository = LocalOutlook
+remoterepository = RemoteOutlook
+
+[Repository LocalOutlook]
+type = Maildir
+localfolders = ~/Maildir/Outlook
+nametrans = lambda foldername: foldername.replace('bar', 'BAR')
+
+[Repository RemoteOutlook]
+type = IMAP
+remotehost = outlook.office365.com
+remoteuser = a0201089@adwin.renesas.com
+ssl = yes
+maxconnections = 1
+realdelete = no
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+
+folderfilter = lambda foldername: foldername in [ "INBOX", "1 Redmine", "2 &YMVYMQ-", "3 MISC", "4 &kBqQVA-", "5 &kDFYMQ-", "6 &fURUCA-", "7 EDA", "8 &MOowuTCvMN4wzTC4MOEw8zDI-" ]
