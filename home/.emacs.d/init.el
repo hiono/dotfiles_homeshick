@@ -73,7 +73,7 @@
  '(initial-scratch-message nil)
  '(linum-format "%5d ")
  '(menu-bar-mode nil)
- '(package-selected-packages (quote (cmake-mode fish-mode)))
+ '(package-selected-packages (quote (cmake-ide cmake-mode fish-mode)))
  '(send-mail-function (quote mailclient-send-it))
  '(tool-bar-mode nil))
 (custom-set-faces
