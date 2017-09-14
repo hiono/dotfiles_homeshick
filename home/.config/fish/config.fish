@@ -1,6 +1,6 @@
 if status --is-interactive
-  set -l IFS # this temporarily clears IFS, which disables the newline-splitting
-  eval (keychain --eval --quiet -Q id_rsa | sed -e 's/\(.*\)=\(.*\); export .*$/set -x \1 \2/g')
+    set -l IFS # this temporarily clears IFS, which disables the newline-splitting
+    eval (ssh-agent -c) > /dev/null
 end
 if status --is-login
     # add PATH
