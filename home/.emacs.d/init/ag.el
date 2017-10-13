@@ -1,4 +1,5 @@
-(el-get-bundle ag
+(el-get-bundle wgrep)
+(el-get-bundle melpa:ag
   :depends (wgrep)
   (with-eval-after-load-feature 'ag
     (setq ag-highlight-search t)  ; 検索キーワードをハイライト

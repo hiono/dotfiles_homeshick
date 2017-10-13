@@ -23,7 +23,7 @@
 
 ;; ヘッダーの表示
 (setq wl-message-ignored-field-list '(".*:")
-      wl-message-visible-field-list '("^To:" "^Subject:" "^From:" "^Date:" "^Cc:" "^X-Mailer:")
+      wl-message-visible-field-list '("^To:" "^Subject:" "^From:" "^Date:" "^Cc:" "^X-Mailer:" "^Message-ID:")
       wl-message-sort-field-list    '("^From:" "^To:" "^Cc:" "^Subject:" "^Date:" "^X-Mailer:"))
 
 ;; ドラフトバッファ
@@ -45,7 +45,7 @@
                                   ".8 リスクマネジメント"
                                   ) ; モードラインに着信通知をする
       wl-biff-use-idle-timer t ; 初期設定は nil。 メールの着信をチェックするフォルダのリスト。 nil の場合は着信のチェックを行ないません。
-      wl-biff-check-interval    60 ; 初期設定は 40 (単位:秒)。 この値ごとにメール着信のチェックを行ないます。
+      wl-biff-check-interval    120 ; 初期設定は 40 (単位:秒)。 この値ごとにメール着信のチェックを行ないます。
       wl-strict-diff-folders wl-biff-check-folder-list ; Use strict diff so wl-biff works with Gmail and others
       )
 
@@ -57,6 +57,7 @@
       wl-smtp-posting-port 587
       wl-local-domain "renesas.com")
 
+;; IMAPはofflineimapに切り替え
 ;; ;; IMAP
 ;; (setq elmo-imap4-default-user "a0201089@adwin.renesas.com"
 ;;       elmo-imap4-default-server "outlook.office365.com"
@@ -82,3 +83,10 @@
 
 ;; 初期設定では default-truncate-lines の値を使います。 Non-nil ならメッセージバッファで長い行の折り返しをしません
 (setq wl-message-truncate-lines 72)
+
+;; search folder
+(setq elmo-search-default-engine 'notmuch)
+
+(setq wl-folder-check-async t) ; 非同期でチェックするように
+
+(setq wl-folder-process-duplicates-alist '((".*" . hide)))

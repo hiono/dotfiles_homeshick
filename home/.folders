@@ -21,15 +21,16 @@
 # %INBOX/8.リスクマネジメント "8.リスクマネジメント"
 
 ## Maildir
-.Outlook/INBOX        "0 受信トレイ"
-.Outlook/1 Redmine    "1 Redmine"
-.Outlook/2 &YMVYMQ-   "2 情報"
-.Outlook/3 MISC       "3 MISC"
-.Outlook/4 &kBqQVA-   "4 通達"
-.Outlook/5 &kDFYMQ-   "5 週報"
-.Outlook/6 &fURUCA-   "6 組合"
-.Outlook/7 EDA        "7 EDA"
-.Outlook/8 &MOowuTCvMN4wzTC4MOEw8zDI- "8 リスクマネジメント"
+.Outlook/INBOX        "受信トレイ"
+# .Outlook/INBOX        "0 受信トレイ"
+# .Outlook/1 Redmine    "1 Redmine"
+# .Outlook/2 &YMVYMQ-   "2 情報"
+# .Outlook/3 MISC       "3 MISC"
+# .Outlook/4 &kBqQVA-   "4 通達"
+# .Outlook/5 &kDFYMQ-   "5 週報"
+# .Outlook/6 &fURUCA-   "6 組合"
+# .Outlook/7 EDA        "7 EDA"
+# .Outlook/8 &MOowuTCvMN4wzTC4MOEw8zDI- "8 リスクマネジメント"
 
 ## POP ユーザのメールボックス
 # &USERNAME@POPSERVER.EXAMPLE.COM
@@ -89,3 +90,14 @@
 
 ## IMAP フォルダのアクセスグループの例
 # % /
+
+*[LIST-daihyo-jushin@lm.renesas.com][Renesas.musashi@lm.renesas.com] "通達"
+[週報 @srsp2] "週報"
+[組合] "組合"
+[eda_info@lm.renesas.com] "EDA"
+[訃報]
+Redmin {
+       [subject: /prj-evaluation/] "RVC EVAL"
+       [CPU Sys Redmine Admin] "CPUSYS"
+       [from:/Redmine@Shikaikatsu/] "G4MH"
+}

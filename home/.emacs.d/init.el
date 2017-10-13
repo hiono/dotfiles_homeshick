@@ -21,6 +21,14 @@
        "https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el")
     (goto-char (point-max))
     (eval-print-last-sexp)))
+;; (unless (require 'el-get nil 'noerror)
+;;   (require 'package)
+;;   (add-to-list 'package-archives
+;;                '("melpa" . "http://melpa.org/packages/"))
+;;   (package-refresh-contents)
+;;   (package-initialize)
+;;   (package-install 'el-get)
+;;   (require 'el-get))
 (add-to-list 'el-get-recipe-path (locate-user-emacs-file "recipes"))
 
 ;; lock the pacakge versions
@@ -73,9 +81,20 @@
  '(initial-scratch-message nil)
  '(linum-format "%5d ")
  '(menu-bar-mode nil)
+ '(notmuch-saved-searches
+   (quote
+    ((:name "inbox" :query "tag:inbox" :key "i")
+     (:name "unread" :query "tag:unread" :key "u")
+     (:name "flagged" :query "tag:flagged" :key "f")
+     (:name "sent" :query "tag:sent" :key "t")
+     (:name "drafts" :query "tag:draft" :key "d")
+     (:name "all mail" :query "*" :key "a")
+     (:name "週報" :query "週報 srsp2@")
+     (:name "Today" :query "today"))))
  '(package-selected-packages (quote (cmake-mode fish-mode)))
  '(send-mail-function (quote mailclient-send-it))
- '(tool-bar-mode nil))
+ '(tool-bar-mode nil)
+ '(tramp-syntax (quote default) nil (tramp)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
