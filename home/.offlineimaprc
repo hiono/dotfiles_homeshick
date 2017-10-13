@@ -2,11 +2,12 @@
 accounts = Outlook
 maxsyncaccounts = 4
 socktimeout = 60
-pythonfile = ~/.offlineimap.py
+pythonfile = ~/bin/.offlineimap.py
 
 [Account Outlook]
 localrepository = LocalOutlook
 remoterepository = RemoteOutlook
+postsynchook = ~/bin/offlineimap-postsync
 
 [Repository LocalOutlook]
 type = Maildir
