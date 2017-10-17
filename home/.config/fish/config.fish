@@ -16,7 +16,7 @@ if status --is-login
     # end
     set -gx PATH $PATH ~/bin
     # ssh_agent_start
-    # source ~/.config/fish/functions/ssh_agent_start.fish
-    ssh_agent_start
+    source ~/.config/fish/functions/ssh_agent_start.fish
+    # ssh_agent_start
 end
 set -x COMPOSE_HTTP_TIMEOUT 300
