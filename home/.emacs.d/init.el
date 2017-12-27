@@ -91,10 +91,10 @@
      (:name "all mail" :query "*" :key "a")
      (:name "週報" :query "週報 srsp2@")
      (:name "Today" :query "today"))))
- '(package-selected-packages (quote (cmake-mode fish-mode)))
+ '(package-selected-packages (quote (ag cmake-mode fish-mode)))
  '(send-mail-function (quote mailclient-send-it))
  '(tool-bar-mode nil)
- '(tramp-syntax (quote default) nil (tramp)))
+ '(tramp-syntax (quote default)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

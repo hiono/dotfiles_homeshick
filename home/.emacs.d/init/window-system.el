@@ -1,6 +1,6 @@
-;; mouse
-(xterm-mouse-mode t)
-(mouse-wheel-mode t)
+;; ;; mouse
+;; (xterm-mouse-mode t)
+;; (mouse-wheel-mode t)
 
 ;; cursor
 (blink-cursor-mode 0)

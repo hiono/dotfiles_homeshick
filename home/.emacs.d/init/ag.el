@@ -1,5 +1,7 @@
 (el-get-bundle wgrep)
-(el-get-bundle melpa:ag
+(el-get-bundle ag
+  :type apt-get
+  :pkgname "silversearcher-ag"
   :depends (wgrep)
   (with-eval-after-load-feature 'ag
     (setq ag-highlight-search t)  ; 検索キーワードをハイライト
