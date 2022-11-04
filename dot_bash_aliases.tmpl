@@ -1,0 +1,11 @@
+{{/* 共通 */ -}}
+export EDITOR="emacsclient -nw -a ''"
+alias em=${EDITOR}
+{{/* 個別 */ -}}
+{{if regexMatch "-WSL2$" .chezmoi.kernel.osrelease -}}
+alias clip='/mnt/c/Windows/System32/clip.exe'
+{{else if eq .chezmoi.os "linux" -}}
+# linux
+{{else -}}
+# other operating system
+{{end -}}

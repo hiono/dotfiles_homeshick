@@ -1,0 +1,83 @@
+### path ################
+addpath() {
+  if [ -d $1 ]; then
+    case ":$PATH:" in
+    *":$1:"*) : ;;        # already there
+    *) PATH="$1:$PATH" ;; # or PATH="$PATH:$1"
+    esac
+  fi
+}
+
+deduppath() {
+  if [ -n "$PATH" ]; then
+    old_PATH=$PATH:
+    PATH=
+    while [ -n "$old_PATH" ]; do
+      x=${old_PATH%%:*} # the first remaining entry
+      case $PATH: in
+      *:"$x":*) ;;        # already there
+      *) PATH=$PATH:$x ;; # not there yet
+      esac
+      old_PATH=${old_PATH#*:}
+    done
+    PATH=${PATH#:}
+    unset old_PATH x
+  fi
+}
+
+addpath ~/.asdf/bin
+addpath ~/.local/bin
+deduppath
+
+if [ ${SHLVL} -le 1 ]; then
+  ### command ############
+  check_cmd() {
+    type $1 >/dev/null 2>&1
+    if [ $? -ne 0 ]; then
+      echo "Install $1"
+      return 2
+    fi
+  }
+  check_update() {
+    CMD=$1
+    shift
+    UPDATE=$@
+    mkdir -p ~/.cache/${CMD}
+    if [ ! -z "$(find ~/.cache/${CMD} -name .updated -mtime +14)" ]; then
+      touch ~/.cache/${CMD}/.updated
+      eval "$@"
+    fi
+  }
+  ### has command ######
+  check_cmd asdf || (echo install asdf;\
+                    REPOS=asdf-vm/asdf;\
+                    VER=$(curl -s https://api.github.com/repos/${REPOS}/releases/latest | grep -Po '(?<=tag_name": ")([v0-9.]+)');\
+                    git clone https://github.com/${REPOS}.git ~/.asdf --branch ${VER})
+  check_cmd keychain || (echo install keychain; sudo apt install -y keychain)
+  ### setup & update ###
+  ### asdf #############
+  . ~/.asdf/asdf.sh
+  . ~/.asdf/completions/asdf.bash
+  check_update asdf "asdf update; asdf plugin update --all"
+
+  ### epilogue #########
+  unset -f check_update
+  unset -f check_cmd
+
+  ### keychain #########
+  keychain -q $(for f in $(ls -1 ~/.ssh/id_*.pub); do basename $f .pub;done)
+  source ~/.keychain/$HOSTNAME-sh
+
+  ### docker ###########
+  tempfile=$(mktemp)
+  service --status-all 2>&1 | grep -q 'docker' > ${tempfile}
+  [ -s ${tempfile} ] && grep -q '-' ${tempfile} && sudo service docker start
+  rm -f ${tempfile}
+
+  ### deta #############
+  [ -d ~/.deta/bin ] && addpath ~/.deta/bin
+fi
+
+hash direnv 2>/dev/null && eval "$(direnv hook bash)"
+export TERM=screen-256color
+[ -e ~/.colorrc ] && . ~/.colorrc
